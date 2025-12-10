@@ -12,6 +12,9 @@ document.addEventListener(
       // eslint-disable-next-line complexity
       .addEventListener("command", event => {
         switch (event.target.id) {
+          case "cmd_toggleGravity":
+            Gravity.toggle();
+            break;
           case "cmd_newNavigator":
             OpenBrowserWindow();
             break;

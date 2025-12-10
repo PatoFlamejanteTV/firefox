@@ -15,6 +15,7 @@
 
   <!-- The event listeners are defined by _initCommandSet in browser-init.js -->
   <commandset id="mainCommandSet">
+    <command id="cmd_toggleGravity" />
     <command id="cmd_newNavigator" />
     <command id="cmd_handleBackspace" />
     <command id="cmd_handleShiftBackspace" />
@@ -124,6 +125,7 @@
   </commandset>
 
   <keyset id="mainKeyset">
+    <key id="key_toggleGravity" key="g" modifiers="accel,alt" command="cmd_toggleGravity"/>
     <key id="key_newNavigator"
          data-l10n-id="window-new-shortcut"
          command="cmd_newNavigator"

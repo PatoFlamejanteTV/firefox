@@ -132,6 +132,11 @@
                     <menuseparator/>
                     <menuitem id="menu_customizeToolbars"
                               command="cmd_CustomizeToolbars" data-l10n-id="menu-view-customize-toolbar2"/>
+                    <menuseparator/>
+                    <menuitem id="menu_gravity"
+                              command="cmd_toggleGravity"
+                              key="key_toggleGravity"
+                              label="Gravity Mode" />
                   </menupopup>
                 </menu>
                 <menu id="viewSidebarMenuMenu" data-l10n-id="menu-view-sidebar">
