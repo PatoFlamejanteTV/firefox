@@ -40,6 +40,7 @@
     <command id="cmd_CustomizeToolbars" />
     <command id="cmd_toggleOfflineStatus" />
     <command id="cmd_quitApplication" />
+    <command id="cmd_gravityMode" />
 
     <command id="View:AboutProcesses" />
     <command id="View:PageSource" />
@@ -349,6 +350,8 @@
          command="cmd_quitApplication"
 #endif
          reserved="true"/>
+
+    <key id="key_gravityMode" command="cmd_gravityMode" key="g" modifiers="accel,alt"/>
 
     <key id="key_restoreLastClosedTabOrWindowOrSession" command="History:RestoreLastClosedTabOrWindowOrSession" data-l10n-id="tab-new-shortcut" modifiers="accel,shift"/>
     <key id="key_undoCloseWindow" command="History:UndoCloseWindow" data-l10n-id="window-new-shortcut" modifiers="accel,shift"/>

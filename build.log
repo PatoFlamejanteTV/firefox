@@ -1,0 +1,1185 @@
+Creating the 'build' site at /home/jules/.mozbuild/srcdirs/app-f53b52ad6d21/_virtualenvs/build
+ 0:00.66 W Clobber not needed.
+ 0:00.95 Using Python 3.12.12 from /home/jules/.mozbuild/srcdirs/app-f53b52ad6d21/_virtualenvs/build/bin/python
+ 0:00.95 checking for vcs source checkout... git
+ 0:01.01 checking for a shell... /usr/bin/sh
+ 0:01.08 checking for host system type... x86_64-pc-linux-gnu
+ 0:01.08 checking for target system type... x86_64-pc-linux-gnu
+ 0:01.60 checking whether cross compiling... no
+ 0:01.73 checking if configuration file confvars.sh exists... /app/browser/confvars.sh
+ 0:01.73 checking if configuration file configure.sh exists... /app/browser/branding/unofficial/configure.sh
+ 0:06.22 Installing bootstrapped toolchain in /home/jules/.mozbuild/clang
+ 0:07.47 Setting up artifact clang.tar.zst
+ 0:07.47 Downloading artifact to local cache: /home/jules/.mozbuild/toolchains/4d13918900214fe8-clang.tar.zst
+ 0:07.58 Downloading... 0.0 %
+ 0:07.75 Downloading... 7.2 %
+ 0:07.82 Downloading... 10.8 %
+ 0:07.96 Downloading... 18.0 %
+ 0:08.02 Downloading... 21.6 %
+ 0:08.19 Downloading... 25.1 %
+ 0:08.33 Downloading... 32.3 %
+ 0:08.79 Downloading... 35.9 %
+ 0:10.42 Downloading... 43.1 %
+ 0:11.23 Downloading... 46.7 %
+ 0:12.09 Downloading... 50.3 %
+ 0:13.77 Downloading... 57.5 %
+ 0:14.47 Downloading... 61.1 %
+ 0:16.16 Downloading... 68.2 %
+ 0:16.93 Downloading... 71.8 %
+ 0:17.80 Downloading... 75.4 %
+ 0:19.29 Downloading... 82.6 %
+ 0:20.12 Downloading... 86.2 %
+ 0:21.71 Downloading... 93.4 %
+ 0:22.60 Downloading... 97.0 %
+ 0:23.17 Downloading... 100.0 %
+ 0:24.82 untarring "/home/jules/.mozbuild/clang.tar.zst"
+ 0:42.23 checking for the target C compiler... /home/jules/.mozbuild/clang/bin/clang
+ 0:42.23 checking for ccache... not found
+ 0:42.61 Installing bootstrapped toolchain in /home/jules/.mozbuild/sysroot-x86_64-linux-gnu
+ 0:44.27 Setting up artifact sysroot-x86_64-linux-gnu.tar.zst
+ 0:44.28 Downloading artifact to local cache: /home/jules/.mozbuild/toolchains/7d44db271c0733a9-sysroot-x86_64-linux-gnu.tar.zst
+ 0:44.39 Downloading... 0.0 %
+ 0:44.71 Downloading... 31.2 %
+ 0:45.31 Downloading... 62.4 %
+ 0:45.98 Downloading... 93.6 %
+ 0:45.99 Downloading... 100.0 %
+ 0:46.20 untarring "/home/jules/.mozbuild/sysroot-x86_64-linux-gnu.tar.zst"
+ 0:49.49 Using target sysroot in /home/jules/.mozbuild/sysroot-x86_64-linux-gnu
+ 0:49.56 checking whether the target C compiler can be used... yes
+ 0:49.56 checking for the target C++ compiler... /home/jules/.mozbuild/clang/bin/clang++
+ 0:49.65 checking whether the target C++ compiler can be used... yes
+ 0:49.68 checking for unwind.h... yes
+ 0:49.73 checking for target linker... lld
+ 0:49.81 checking for _Unwind_Backtrace... yes
+ 0:49.82 checking for Python 3... /home/jules/.mozbuild/srcdirs/app-f53b52ad6d21/_virtualenvs/build/bin/python (3.12.12)
+ 0:49.82 checking for git... /usr/bin/git
+ 0:49.83 checking for Git version... 2.51.2
+ 0:49.84 Using host sysroot in /home/jules/.mozbuild/sysroot-x86_64-linux-gnu
+ 0:49.85 checking the target C compiler version... 20.1.8
+ 0:49.87 checking the target C compiler works... yes
+ 0:49.87 checking the target C++ compiler version... 20.1.8
+ 0:49.90 checking the target C++ compiler works... yes
+ 0:49.90 checking for the host C compiler... /home/jules/.mozbuild/clang/bin/clang
+ 0:49.90 checking whether the host C compiler can be used... yes
+ 0:49.90 checking the host C compiler version... 20.1.8
+ 0:49.91 checking the host C compiler works... yes
+ 0:49.91 checking for the host C++ compiler... /home/jules/.mozbuild/clang/bin/clang++
+ 0:49.91 checking whether the host C++ compiler can be used... yes
+ 0:49.91 checking the host C++ compiler version... 20.1.8
+ 0:49.91 checking the host C++ compiler works... yes
+ 0:49.94 checking for host linker... lld
+ 0:50.04 checking for 64-bit OS... yes
+ 0:50.08 checking for new enough STL headers from libstdc++... yes
+ 0:50.17 checking for __thread keyword for TLS variables... yes
+ 0:50.19 checking for the assembler... /home/jules/.mozbuild/clang/bin/clang
+ 0:50.23 checking for llvm-objdump... /home/jules/.mozbuild/clang/bin/llvm-objdump
+ 0:50.26 checking for ar... /home/jules/.mozbuild/clang/bin/llvm-ar
+ 0:50.30 checking whether ar supports response files... yes
+ 0:50.32 checking for host_ar... /home/jules/.mozbuild/clang/bin/llvm-ar
+ 0:50.36 checking for nm... /home/jules/.mozbuild/clang/bin/llvm-nm
+ 0:50.39 checking for -mavxvnni support... yes
+ 0:50.41 checking for -mavx512bw support... yes
+ 0:50.44 checking for -mavx512vnni support... yes
+ 0:50.77 Installing bootstrapped toolchain in /home/jules/.mozbuild/pkgconf
+ 0:52.07 Setting up artifact pkgconf.tar.zst
+ 0:52.08 Downloading artifact to local cache: /home/jules/.mozbuild/toolchains/39c3509761ff20c1-pkgconf.tar.zst
+ 0:52.18 Downloading... 0.0 %
+ 0:52.18 Downloading... 100.0 %
+ 0:52.19 untarring "/home/jules/.mozbuild/pkgconf.tar.zst"
+ 0:52.33 checking for pkg_config... /home/jules/.mozbuild/pkgconf/pkg-config
+ 0:52.34 checking for pkg-config version... 2.5.1
+ 0:52.34 checking whether pkg-config is pkgconf... yes
+ 0:52.40 checking for strndup... yes
+ 0:52.46 checking for posix_memalign... yes
+ 0:52.52 checking for memalign... yes
+ 0:52.59 checking for malloc_usable_size... yes
+ 0:52.62 checking for malloc.h... yes
+ 0:52.66 checking whether malloc_usable_size definition can use const argument... no
+ 0:52.69 checking for stdint.h... yes
+ 0:52.71 checking for inttypes.h... yes
+ 0:52.74 checking for alloca.h... yes
+ 0:52.77 checking for sys/byteorder.h... no
+ 0:52.79 checking for getopt.h... yes
+ 0:52.83 checking for unistd.h... yes
+ 0:52.85 checking for nl_types.h... yes
+ 0:52.88 checking for cpuid.h... yes
+ 0:52.91 checking for fts.h... yes
+ 0:52.94 checking for sys/statvfs.h... yes
+ 0:52.97 checking for sys/statfs.h... yes
+ 0:53.00 checking for sys/vfs.h... yes
+ 0:53.02 checking for sys/mount.h... yes
+ 0:53.05 checking for sys/quota.h... yes
+ 0:53.09 checking for linux/quota.h... yes
+ 0:53.12 checking for linux/if_addr.h... yes
+ 0:53.15 checking for linux/rtnetlink.h... yes
+ 0:53.18 checking for sys/queue.h... yes
+ 0:53.21 checking for sys/types.h... yes
+ 0:53.24 checking for netinet/in.h... yes
+ 0:53.27 checking for byteswap.h... yes
+ 0:53.29 checking for memfd_create in sys/mman.h... no
+ 0:53.37 checking for clock_gettime(CLOCK_MONOTONIC)... yes
+ 0:53.45 checking for res_ninit()... yes
+ 0:53.52 checking for dladdr... no
+ 0:53.58 checking for dladdr in -ldl... yes
+ 0:53.61 checking for dlfcn.h... yes
+ 0:53.67 checking for dlopen in -ldl... yes
+ 0:53.72 checking for gethostbyname_r in -lc_r... no
+ 0:53.78 checking for socket in -lsocket... no
+ 0:53.84 checking for pthread_create... no
+ 0:53.90 checking for pthread_create in -lpthread... yes
+ 0:53.94 checking for pthread.h... yes
+ 0:53.96 checking whether the C compiler supports -pthread... yes
+ 0:54.10 checking whether 64-bits std::atomic requires -latomic... no
+ 0:54.15 checking whether the C++ compiler supports -Wdeprecated-literal-operator... yes
+ 0:54.18 checking whether the C compiler supports -Winvalid-utf8... yes
+ 0:54.21 checking whether the C++ compiler supports -Winvalid-utf8... yes
+ 0:54.26 checking whether the C compiler supports -Wformat... yes
+ 0:54.28 checking whether the C++ compiler supports -Wformat... yes
+ 0:54.33 checking whether the C compiler supports -Wno-character-conversion... no
+ 0:54.35 checking whether the C++ compiler supports -Wno-character-conversion... no
+ 0:54.38 checking whether the C++ compiler supports -fno-sized-deallocation... yes
+ 0:54.41 checking whether the C++ compiler supports -fno-aligned-new... yes
+ 0:55.06 checking whether we're trying to statically link with libstdc++... no
+ 0:55.13 checking whether the C linker supports -Wl,--build-id=uuid... yes
+ 0:55.16 checking whether the C assembler supports -Wa,--noexecstack... yes
+ 0:55.21 checking whether the C linker supports -Wl,-z,noexecstack... yes
+ 0:55.28 checking whether the C linker supports -Wl,-z,text... yes
+ 0:55.34 checking whether the C linker supports -Wl,-z,relro... yes
+ 0:55.39 checking whether the C linker supports -Wl,-z,now... yes
+ 0:55.45 checking whether the C linker supports -Wl,-z,nocopyreloc... yes
+ 0:55.48 checking whether the C assembler supports -fPIC... yes
+ 0:55.51 checking whether the C compiler supports -fPIC... yes
+ 0:55.53 checking whether the C++ compiler supports -fPIC... yes
+ 0:55.60 checking what kind of list files are supported by the linker... linkerlist
+ 0:55.60 checking for llvm_profdata... /home/jules/.mozbuild/clang/bin/llvm-profdata
+ 0:55.64 checking for readelf... /home/jules/.mozbuild/clang/bin/llvm-readelf
+ 0:55.68 checking for objcopy... /home/jules/.mozbuild/clang/bin/llvm-objcopy
+ 0:55.69 checking for alsa... yes
+ 0:55.69 checking MOZ_ALSA_CFLAGS... -I/home/jules/.mozbuild/sysroot-x86_64-linux-gnu/usr/include -I/home/jules/.mozbuild/sysroot-x86_64-linux-gnu/usr/include/alsa
+ 0:55.70 checking MOZ_ALSA_LIBS... -L/home/jules/.mozbuild/sysroot-x86_64-linux-gnu/usr/lib/x86_64-linux-gnu -lasound
+ 0:55.70 checking for libpulse... yes
+ 0:55.70 checking MOZ_PULSEAUDIO_CFLAGS... -I/home/jules/.mozbuild/sysroot-x86_64-linux-gnu/usr/include -D_REENTRANT
+ 0:55.71 checking MOZ_PULSEAUDIO_LIBS... -L/home/jules/.mozbuild/sysroot-x86_64-linux-gnu/usr/lib/x86_64-linux-gnu -lpulse
+ 0:55.71 checking for rustc... /home/jules/.cargo/bin/rustc
+ 0:55.71 checking for cargo... /home/jules/.cargo/bin/cargo
+ 0:57.80 Actually using '/home/jules/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/rustc'
+ 0:58.64 Actually using '/home/jules/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo'
+ 0:58.70 checking rustc version... 1.91.0
+ 0:58.78 checking cargo version... 1.91.0
+ 1:03.31 checking for rust host triplet... x86_64-unknown-linux-gnu
+ 1:03.47 checking for rust target triplet... x86_64-unknown-linux-gnu
+ 1:03.48 checking for rustdoc... /home/jules/.cargo/bin/rustdoc
+ 1:03.77 Installing bootstrapped toolchain in /home/jules/.mozbuild/cbindgen
+ 1:05.05 Setting up artifact cbindgen.tar.zst
+ 1:05.05 Downloading artifact to local cache: /home/jules/.mozbuild/toolchains/959c144a2dd862c3-cbindgen.tar.zst
+ 1:05.23 Downloading... 0.0 %
+ 1:05.25 Downloading... 100.0 %
+ 1:05.26 untarring "/home/jules/.mozbuild/cbindgen.tar.zst"
+ 1:05.44 checking for cbindgen... /home/jules/.mozbuild/cbindgen/cbindgen
+ 1:05.44 checking for rustfmt... /home/jules/.cargo/bin/rustfmt
+ 1:05.44 checking for clang for bindgen... /home/jules/.mozbuild/clang/bin/clang++
+ 1:05.46 checking for libclang for bindgen... /home/jules/.mozbuild/clang/lib/libclang.so
+ 1:05.47 checking that libclang is new enough... yes
+ 1:05.47 checking bindgen cflags... ['-x', 'c++', '-fno-sized-deallocation', '-fno-aligned-new', '-DTRACING=1', '-DIMPL_LIBXUL', '-DMOZILLA_INTERNAL_API', '-DRUST_BINDGEN', '--sysroot', '/home/jules/.mozbuild/sysroot-x86_64-linux-gnu', '-std=gnu++20']
+ 1:05.51 checking for tm_zone and tm_gmtoff in struct tm... yes
+ 1:05.57 checking for getpagesize... yes
+ 1:05.63 checking for gmtime_r... yes
+ 1:05.69 checking for localtime_r... yes
+ 1:05.75 checking for gettid... no
+ 1:05.81 checking for setpriority... yes
+ 1:05.87 checking for syscall... yes
+ 1:05.93 checking for getc_unlocked... yes
+ 1:06.00 checking for pthread_getname_np... no
+ 1:06.06 checking for pthread_get_name_np... no
+ 1:06.12 checking for strerror... yes
+ 1:06.19 checking for nl_langinfo and CODESET... yes
+ 1:06.26 checking for __cxa_demangle... yes
+ 1:06.32 checking for _getc_nolock... no
+ 1:06.38 checking for localeconv... yes
+ 1:06.72 Installing bootstrapped toolchain in /home/jules/.mozbuild/node
+ 1:07.96 Setting up artifact node.tar.zst
+ 1:07.96 Downloading artifact to local cache: /home/jules/.mozbuild/toolchains/b5da4dd6b028d490-node.tar.zst
+ 1:08.11 Downloading... 0.0 %
+ 1:08.35 Downloading... 36.8 %
+ 1:08.55 Downloading... 73.7 %
+ 1:08.69 Downloading... 100.0 %
+ 1:08.85 untarring "/home/jules/.mozbuild/node.tar.zst"
+ 1:12.72 checking for nodejs... /home/jules/.mozbuild/node/bin/node (22.16.0)
+ 1:12.73 checking for gtk+-wayland-3.0 >= 3.14 xkbcommon >= 0.4.1... yes
+ 1:12.74 checking MOZ_WAYLAND_CFLAGS... -I/home/jules/.mozbuild/sysroot-x86_64-linux-gnu/usr/include/gtk-3.0 -I/home/jules/.mozbuild/sysroot-x86_64-linux-gnu/usr/include/pango-1.0 -I/home/jules/.mozbuild/sysroot-x86_64-linux-gnu/usr/include -I/home/jules/.mozbuild/sysroot-x86_64-linux-gnu/usr/include/cairo -I/home/jules/.mozbuild/sysroot-x86_64-linux-gnu/usr/include/pixman-1 -I/home/jules/.mozbuild/sysroot-x86_64-linux-gnu/usr/include/libpng12 -I/home/jules/.mozbuild/sysroot-x86_64-linux-gnu/usr/include/gdk-pixbuf-2.0 -I/home/jules/.mozbuild/sysroot-x86_64-linux-gnu/usr/include/atk-1.0 -I/home/jules/.mozbuild/sysroot-x86_64-linux-gnu/usr/include/at-spi2-atk/2.0 -I/home/jules/.mozbuild/sysroot-x86_64-linux-gnu/usr/include/at-spi-2.0 -I/home/jules/.mozbuild/sysroot-x86_64-linux-gnu/usr/include/dbus-1.0 -I/home/jules/.mozbuild/sysroot-x86_64-linux-gnu/usr/lib/x86_64-linux-gnu/dbus-1.0/include -I/home/jules/.mozbuild/sysroot-x86_64-linux-gnu/usr/include/freetype2 -I/home/jules/.mozbuild/sysroot-x86_64-linux-gnu/usr/include/harfbuzz -I/home/jules/.mozbuild/sysroot-x86_64-linux-gnu/usr/include/gio-unix-2.0/ -pthread -I/home/jules/.mozbuild/sysroot-x86_64-linux-gnu/usr/include/glib-2.0 -I/home/jules/.mozbuild/sysroot-x86_64-linux-gnu/usr/lib/x86_64-linux-gnu/glib-2.0/include
+ 1:12.75 checking MOZ_WAYLAND_LIBS... -L/home/jules/.mozbuild/sysroot-x86_64-linux-gnu/usr/lib/x86_64-linux-gnu -lgtk-3 -lgdk-3 -lpangocairo-1.0 -lcairo-gobject -lcairo -lgdk_pixbuf-2.0 -latk-1.0 -lpango-1.0 -lgio-2.0 -lgobject-2.0 -lglib-2.0 -lxkbcommon
+ 1:12.75 checking for pango >= 1.22.0... yes
+ 1:12.76 checking MOZ_PANGO_CFLAGS... -I/home/jules/.mozbuild/sysroot-x86_64-linux-gnu/usr/include/pango-1.0 -pthread -I/home/jules/.mozbuild/sysroot-x86_64-linux-gnu/usr/include/glib-2.0 -I/home/jules/.mozbuild/sysroot-x86_64-linux-gnu/usr/lib/x86_64-linux-gnu/glib-2.0/include -I/home/jules/.mozbuild/sysroot-x86_64-linux-gnu/usr/include
+ 1:12.76 checking MOZ_PANGO_LIBS... -L/home/jules/.mozbuild/sysroot-x86_64-linux-gnu/usr/lib/x86_64-linux-gnu -lpango-1.0 -lgobject-2.0 -lglib-2.0
+ 1:12.77 checking for fontconfig >= 2.7.0... yes
+ 1:12.77 checking _FONTCONFIG_CFLAGS... -I/home/jules/.mozbuild/sysroot-x86_64-linux-gnu/usr/include -I/home/jules/.mozbuild/sysroot-x86_64-linux-gnu/usr/include/freetype2
+ 1:12.77 checking _FONTCONFIG_LIBS... -L/home/jules/.mozbuild/sysroot-x86_64-linux-gnu/usr/lib/x86_64-linux-gnu -lfontconfig -lfreetype
+ 1:12.78 checking for freetype2 >= 9.10.3... yes
+ 1:12.78 checking _FT2_CFLAGS... -I/home/jules/.mozbuild/sysroot-x86_64-linux-gnu/usr/include/freetype2
+ 1:12.78 checking _FT2_LIBS... -L/home/jules/.mozbuild/sysroot-x86_64-linux-gnu/usr/lib/x86_64-linux-gnu -lfreetype
+ 1:12.81 checking for tar... /usr/bin/tar
+ 1:12.82 checking for unzip... /usr/bin/unzip
+ 1:12.82 checking for the Mozilla API key... no
+ 1:12.82 checking for the Google Location Service API key... no
+ 1:12.82 checking for the Google Safebrowsing API key... no
+ 1:12.82 checking for the Bing API key... no
+ 1:12.82 checking for the Adjust SDK key... no
+ 1:12.82 checking for the Leanplum SDK key... no
+ 1:12.82 checking for the Pocket API key... no
+ 1:12.83 checking for x11 xcb xcb-shm x11-xcb xext xrandr >= 1.4.0 xcomposite xcursor xdamage xfixes xi... yes
+ 1:12.84 checking MOZ_X11_CFLAGS... -I/home/jules/.mozbuild/sysroot-x86_64-linux-gnu/usr/include
+ 1:12.84 checking MOZ_X11_LIBS... -L/home/jules/.mozbuild/sysroot-x86_64-linux-gnu/usr/lib/x86_64-linux-gnu -lxcb-shm -lX11-xcb -lXrandr -lXcomposite -lXcursor -lXdamage -lXi -lXext -lXfixes -lX11 -lxcb
+ 1:12.85 checking for ice sm... yes
+ 1:12.85 checking MOZ_X11_SM_CFLAGS... -I/home/jules/.mozbuild/sysroot-x86_64-linux-gnu/usr/include
+ 1:12.94 checking for stat64... yes
+ 1:13.00 checking for lstat64... yes
+ 1:13.06 checking for truncate64... yes
+ 1:13.13 checking for statvfs64... yes
+ 1:13.19 checking for statvfs... yes
+ 1:13.25 checking for statfs64... yes
+ 1:13.32 checking for statfs... yes
+ 1:13.38 checking for lutimes... yes
+ 1:13.44 checking for posix_fadvise... yes
+ 1:13.50 checking for posix_fallocate... yes
+ 1:13.56 checking for eventfd... yes
+ 1:13.62 checking for arc4random... no
+ 1:13.68 checking for arc4random_buf... no
+ 1:13.74 checking for mallinfo... yes
+ 1:13.76 checking for sys/ioccom.h... no
+ 1:13.85 checking for -z pack-relative-relocs option to ld... yes
+ 1:15.22 Installing bootstrapped toolchain in /home/jules/.mozbuild/nasm
+ 1:16.44 Setting up artifact nasm.tar.zst
+ 1:16.44 Downloading artifact to local cache: /home/jules/.mozbuild/toolchains/232e700132df0f80-nasm.tar.zst
+ 1:16.58 Downloading... 0.0 %
+ 1:16.60 Downloading... 100.0 %
+ 1:16.60 untarring "/home/jules/.mozbuild/nasm.tar.zst"
+ 1:16.76 checking for nasm... /home/jules/.mozbuild/nasm/nasm
+ 1:16.76 checking nasm version... 3.01
+ 1:17.09 Installing bootstrapped toolchain in /home/jules/.mozbuild/sysroot-wasm32-wasi
+ 1:18.24 Setting up artifact sysroot-wasm32-wasi.tar.zst
+ 1:18.24 Downloading artifact to local cache: /home/jules/.mozbuild/toolchains/e2d4ac5262b13947-sysroot-wasm32-wasi.tar.zst
+ 1:18.38 Downloading... 0.0 %
+ 1:18.48 Downloading... 100.0 %
+ 1:18.50 untarring "/home/jules/.mozbuild/sysroot-wasm32-wasi.tar.zst"
+ 1:19.66 Using wasi sysroot in /home/jules/.mozbuild/sysroot-wasm32-wasi
+ 1:19.66 checking for the wasm C compiler... /home/jules/.mozbuild/clang/bin/clang
+ 1:19.71 checking whether the wasm C compiler can be used... yes
+ 1:19.71 checking the wasm C compiler version... 20.1.8
+ 1:19.80 checking the wasm C compiler works... yes
+ 1:19.82 checking the wasm C compiler can find wasi headers... yes
+ 1:19.94 checking the wasm C linker can find wasi libraries... yes
+ 1:19.94 checking for the wasm C++ compiler... /home/jules/.mozbuild/clang/bin/clang++
+ 1:20.00 checking whether the wasm C++ compiler can be used... yes
+ 1:20.00 checking the wasm C++ compiler version... 20.1.8
+ 1:20.02 checking the wasm C++ compiler works... yes
+ 1:20.05 checking the wasm C++ compiler can find wasi headers... yes
+ 1:20.15 checking the wasm C++ linker can find wasi libraries... yes
+ 1:20.19 checking for clock() in wasi sysroot... no
+ 1:20.27 checking for emulated clock() in wasi sysroot... yes
+ 1:20.59 Installing bootstrapped toolchain in /home/jules/.mozbuild/dump_syms
+ 1:21.83 Setting up artifact dump_syms.tar.zst
+ 1:21.83 Downloading artifact to local cache: /home/jules/.mozbuild/toolchains/6a7d61cc7cd27da0-dump_syms.tar.zst
+ 1:21.96 Downloading... 0.0 %
+ 1:22.00 Downloading... 100.0 %
+ 1:22.02 untarring "/home/jules/.mozbuild/dump_syms.tar.zst"
+ 1:22.19 checking for dump_syms... /home/jules/.mozbuild/dump_syms/dump_syms
+ 1:22.25 checking for getcontext... yes
+ 1:22.26 checking for gthread-2.0... yes
+ 1:22.26 checking MOZ_GTHREAD_CFLAGS... -pthread -I/home/jules/.mozbuild/sysroot-x86_64-linux-gnu/usr/include/glib-2.0 -I/home/jules/.mozbuild/sysroot-x86_64-linux-gnu/usr/lib/x86_64-linux-gnu/glib-2.0/include -I/home/jules/.mozbuild/sysroot-x86_64-linux-gnu/usr/include
+ 1:22.27 checking MOZ_GTHREAD_LIBS... -L/home/jules/.mozbuild/sysroot-x86_64-linux-gnu/usr/lib/x86_64-linux-gnu -lgthread-2.0 -pthread -lglib-2.0
+ 1:22.28 checking for gtk+-3.0 >= 3.14.0 gtk+-unix-print-3.0 glib-2.0 gobject-2.0 gio-unix-2.0... yes
+ 1:22.29 checking MOZ_GTK3_CFLAGS... -I/home/jules/.mozbuild/sysroot-x86_64-linux-gnu/usr/include/gtk-3.0/unix-print -I/home/jules/.mozbuild/sysroot-x86_64-linux-gnu/usr/include/gtk-3.0 -I/home/jules/.mozbuild/sysroot-x86_64-linux-gnu/usr/include/pango-1.0 -I/home/jules/.mozbuild/sysroot-x86_64-linux-gnu/usr/include -I/home/jules/.mozbuild/sysroot-x86_64-linux-gnu/usr/include/cairo -I/home/jules/.mozbuild/sysroot-x86_64-linux-gnu/usr/include/at-spi2-atk/2.0 -I/home/jules/.mozbuild/sysroot-x86_64-linux-gnu/usr/include/at-spi-2.0 -I/home/jules/.mozbuild/sysroot-x86_64-linux-gnu/usr/include/dbus-1.0 -I/home/jules/.mozbuild/sysroot-x86_64-linux-gnu/usr/lib/x86_64-linux-gnu/dbus-1.0/include -I/home/jules/.mozbuild/sysroot-x86_64-linux-gnu/usr/include/harfbuzz -I/home/jules/.mozbuild/sysroot-x86_64-linux-gnu/usr/include/atk-1.0 -I/home/jules/.mozbuild/sysroot-x86_64-linux-gnu/usr/include/pixman-1 -I/home/jules/.mozbuild/sysroot-x86_64-linux-gnu/usr/include/freetype2 -I/home/jules/.mozbuild/sysroot-x86_64-linux-gnu/usr/include/libpng12 -I/home/jules/.mozbuild/sysroot-x86_64-linux-gnu/usr/include/gdk-pixbuf-2.0 -I/home/jules/.mozbuild/sysroot-x86_64-linux-gnu/usr/include/gio-unix-2.0/ -pthread -I/home/jules/.mozbuild/sysroot-x86_64-linux-gnu/usr/include/glib-2.0 -I/home/jules/.mozbuild/sysroot-x86_64-linux-gnu/usr/lib/x86_64-linux-gnu/glib-2.0/include
+ 1:22.29 checking MOZ_GTK3_LIBS... -L/home/jules/.mozbuild/sysroot-x86_64-linux-gnu/usr/lib/x86_64-linux-gnu -lgtk-3 -lgdk-3 -lpangocairo-1.0 -lpango-1.0 -latk-1.0 -lcairo-gobject -lcairo -lgdk_pixbuf-2.0 -lgio-2.0 -lgobject-2.0 -lglib-2.0
+ 1:22.30 checking for glib-2.0 >= 2.42 gobject-2.0... yes
+ 1:22.30 checking GLIB_CFLAGS... -I/home/jules/.mozbuild/sysroot-x86_64-linux-gnu/usr/include/glib-2.0 -I/home/jules/.mozbuild/sysroot-x86_64-linux-gnu/usr/lib/x86_64-linux-gnu/glib-2.0/include -I/home/jules/.mozbuild/sysroot-x86_64-linux-gnu/usr/include
+ 1:22.30 checking GLIB_LIBS... -L/home/jules/.mozbuild/sysroot-x86_64-linux-gnu/usr/lib/x86_64-linux-gnu -lgobject-2.0 -lglib-2.0
+ 1:22.31 checking for dbus-1 >= 0.60... yes
+ 1:22.31 checking MOZ_DBUS_CFLAGS... -I/home/jules/.mozbuild/sysroot-x86_64-linux-gnu/usr/include/dbus-1.0 -I/home/jules/.mozbuild/sysroot-x86_64-linux-gnu/usr/lib/x86_64-linux-gnu/dbus-1.0/include
+ 1:22.31 checking MOZ_DBUS_LIBS... -L/home/jules/.mozbuild/sysroot-x86_64-linux-gnu/usr/lib/x86_64-linux-gnu -ldbus-1
+ 1:22.35 checking for sin_len in struct sockaddr_in... no
+ 1:22.37 checking for sin_len6 in struct sockaddr_in6... no
+ 1:22.40 checking for sa_len in struct sockaddr... no
+ 1:22.44 checking for pthread_cond_timedwait_monotonic_np... no
+ 1:22.47 checking for 32-bits ethtool_cmd.speed... yes
+ 1:22.76 Installing bootstrapped toolchain in /home/jules/.mozbuild/onnxruntime-x86_64-linux-gnu
+ 1:23.96 Setting up artifact onnxruntime-x86_64-linux-gnu.tar.zst
+ 1:23.96 Downloading artifact to local cache: /home/jules/.mozbuild/toolchains/aeb63a8ef15dcb0d-onnxruntime-x86_64-linux-gnu.tar.zst
+ 1:24.07 Downloading... 0.0 %
+ 1:24.11 Downloading... 100.0 %
+ 1:24.12 untarring "/home/jules/.mozbuild/onnxruntime-x86_64-linux-gnu.tar.zst"
+ 1:24.37 checking ONNX install path... /home/jules/.mozbuild/onnxruntime-x86_64-linux-gnu/libonnxruntime.so
+ 1:24.41 checking for valid C compiler optimization flags... yes
+ 1:24.42 checking for awk... /usr/bin/gawk
+ 1:24.44 checking for gmake... /usr/bin/gmake
+ 1:24.45 checking for gmake version... 4.3
+ 1:24.46 checking for watchman... not found
+ 1:24.48 checking for xargs... /usr/bin/xargs
+ 1:24.61 checking for strip... /home/jules/.mozbuild/clang/bin/llvm-strip
+ 1:24.61 Creating config.status
+ 1:25.05 Reticulating splines...
+ 1:45.17 Finished reading 2636 moz.build files in 5.42s
+ 1:45.17 Read 57 gyp files in parallel contributing 0.00s to total wall time
+ 1:45.17 Processed into 19211 build config descriptors in 5.84s
+ 1:45.17 RecursiveMake backend executed in 8.16s
+ 1:45.17   5746 total backend files; 4452 created; 2 updated; 1292 unchanged; 0 deleted; 22 -> 2152 Makefile
+ 1:45.17 FasterMake backend executed in 0.00s
+ 1:45.17   0 total backend files; 0 created; 0 updated; 0 unchanged; 0 deleted
+ 1:45.17 Clangd backend executed in 0.00s
+ 1:45.17   0 total backend files; 0 created; 0 updated; 0 unchanged; 0 deleted
+ 1:45.17 Total wall time: 20.19s; CPU time: 19.94s; Efficiency: 99%; Untracked: 0.77s
+ 1:47.69 W Adding make options from None
+    MOZ_OBJDIR=/app/obj-x86_64-pc-linux-gnu
+    OBJDIR=/app/obj-x86_64-pc-linux-gnu
+ 1:47.69 /usr/bin/gmake -f client.mk -j4 -s
+ 1:48.16 Elapsed: 0.18s; From dist/xpi-stage: Kept 0 existing; Added/updated 626; Removed 0 files and 0 directories.
+ 1:48.49 Elapsed: 0.27s; From _tests: Kept 30 existing; Added/updated 1369; Removed 0 files and 0 directories.
+ 1:48.63 Elapsed: 0.64s; From dist/include: Kept 3004 existing; Added/updated 5409; Removed 0 files and 0 directories.
+ 1:48.63 Elapsed: 0.42s; From dist/bin: Kept 15 existing; Added/updated 2875; Removed 0 files and 0 directories.
+ 1:48.72 ./mozilla-config.h.stub
+ 1:48.72 ./buildid.h.stub
+ 1:48.72 ./source-repo.h.stub
+ 1:48.73 ./RelationType.h.stub
+ 1:48.73 ./Role.h.stub
+ 1:48.99 ./stl.sentinel.stub
+ 1:49.00 ./system-header.sentinel.stub
+ 1:49.03 ./xpcAccEvents.h.stub
+ 1:49.05 config
+ 1:49.28 ./buildconfig.rs.stub
+ 1:49.28 ./fficonfig.h.stub
+ 1:49.29 ./ffi.h.stub
+ 1:49.49 ./config.h.stub
+ 1:49.56 ./cbindgen-metadata.json.stub
+ 1:49.56 ./UseCounterList.h.stub
+ 1:49.76 ./UseCounterWorkerList.h.stub
+ 1:49.82 ./ServoCSSPropList.py.stub
+ 1:49.83 ./BaseChars.h.stub
+ 1:50.06 ./IsCombiningDiacritic.h.stub
+ 1:50.14 ./js-confdefs.h.stub
+ 1:50.80 ./js-config.h.stub
+ 1:51.07 ./ProfilingCategoryList.h.stub
+ 1:51.12 ./PrefsGenerated.h.stub
+ 1:51.35 ./ReservedWordsGenerated.h.stub
+ 1:51.53 ./StatsPhasesGenerated.h.stub
+ 1:51.54 ./ABIFunctionTypeGenerated.h.stub
+ 1:51.83 ./MIROpsGenerated.h.stub
+ 1:51.89 ./LIROpsGenerated.h.stub
+ 1:52.18 ./CacheIROpsGenerated.h.stub
+ 1:52.78 ./AtomicOperationsGenerated.h.stub
+ 1:53.00 ./WasmBuiltinModuleGenerated.h.stub
+ 1:53.33 ./FrameIdList.h.stub
+ 1:53.54 ./FrameTypeList.h.stub
+ 1:53.56 ./CountedUnknownProperties.h.stub
+ 1:53.74 ./ExampleStylesheet.h.stub
+ 1:53.90 ./StaticPrefListAll.h.stub
+ 1:53.91 ./registered_field_trials.h.stub
+ 1:54.09 ./GeckoTraceEvents.h.stub
+ 1:54.27 ./glean_adapter.rs.stub
+ 1:54.65 ./TestGeckoTraceEvents.h.stub
+ 1:55.04 ./metrics_yamls.cached.stub
+ 1:55.31 ./pings_yamls.cached.stub
+ 1:55.95 ./NimbusFeatureManifest.h.stub
+ 1:56.20 ./TelemetryHistogramEnums.h.stub
+ 1:56.73 ./TelemetryHistogramNameMap.h.stub
+ 1:57.14 ./TelemetryScalarData.h.stub
+ 1:57.31 ./TelemetryScalarEnums.h.stub
+ 1:57.64 ./TelemetryEventData.h.stub
+ 1:57.73 ./TelemetryEventEnums.h.stub
+ 1:58.28 ./TelemetryProcessEnums.h.stub
+ 1:58.53 ./TelemetryProcessData.h.stub
+ 1:58.57 ./TelemetryUserInteractionData.h.stub
+ 1:58.82 ./TelemetryUserInteractionNameMap.h.stub
+ 1:58.87 ./validated.yaml.stub
+ 1:58.97 ./glean_metrics.rs.stub
+ 1:59.12 ./dep1Cert.h.stub
+ 1:59.16 ./dep2Cert.h.stub
+ 1:59.43 ./primaryCert.h.stub
+ 1:59.44 ./secondaryCert.h.stub
+ 1:59.69 ./xpcshellCert.h.stub
+ 1:59.70 ./profiling_categories.rs.stub
+ 1:59.89 ./ErrorList.h.stub
+ 1:59.97 ./ErrorNamesInternal.h.stub
+ 1:59.97 ./error_list.rs.stub
+ 2:00.22 ./Services.h.stub
+ 2:00.25 ./GeckoProcessTypes.h.stub
+ 2:00.26 ./Components.h.stub
+ 2:00.49 ./nsGkAtomList.h.stub
+ 2:00.52 ./nsGkAtomConsts.h.stub
+ 2:00.52 ./xpidl.stub.stub
+ 2:01.10 ./application.ini.stub
+ 2:01.11 ./GeneratedElementDocumentState.h.stub
+ 2:01.12 config/nsinstall_real
+ 2:01.18 ./fragmentdirectives_ffi_generated.h.stub
+ 2:01.21 ./CSSStyleProperties.webidl.stub
+ 2:01.38 ./CSSPageDescriptors.webidl.stub
+ 2:01.53 ./CSSPositionTryDescriptors.webidl.stub
+ 2:01.54 ./data_encoding_ffi_generated.h.stub
+ 2:01.69 ./mime_guess_ffi_generated.h.stub
+ 2:01.84 ./audioipc2_client_ffi_generated.h.stub
+ 2:01.87 ./audioipc2_server_ffi_generated.h.stub
+ 2:02.00 ./midir_impl_ffi_generated.h.stub
+ 2:02.17 ./origin_trials_ffi_generated.h.stub
+ 2:02.21 ./webrender_ffi_generated.h.stub
+ 2:02.35 ./wgpu_ffi_generated.h.stub
+ 2:02.49 ./unicode_bidi_ffi_generated.h.stub
+ 2:02.52 ./mapped_hyph.h.stub
+ 2:02.91 ./fluent_ffi_generated.h.stub
+ 2:02.97 ./l10nregistry_ffi_generated.h.stub
+ 2:03.23 ./localization_ffi_generated.h.stub
+ 2:03.35 ./fluent_langneg_ffi_generated.h.stub
+ 2:03.59 ./locale_service_glue_generated.h.stub
+ 2:03.62 ./oxilangtag_ffi_generated.h.stub
+ 2:03.63 ./unic_langid_ffi_generated.h.stub
+ 2:03.73 ./selfhosted.out.h.stub
+ 2:03.91 ./NonCustomCSSPropertyId.h.stub
+ 2:03.96 ./ServoCSSPropList.h.stub
+ 2:03.98 ./CompositorAnimatableProperties.h.stub
+ 2:04.25 ./ServoStyleConsts.h.stub
+ 2:04.28 ./mp4parse_ffi_generated.h.stub
+ 2:04.30 ./idna_glue.h.stub
+ 2:04.31 ./MozURL_ffi.h.stub
+ 2:04.58 ./rust_helper.h.stub
+ 2:04.65 ./uritemplate_glue.h.stub
+ 2:04.68 ./urlpattern_glue.h.stub
+ 2:04.93 ./neqo_glue_ffi_generated.h.stub
+ 2:04.99 ./signature_cache_ffi.h.stub
+ 2:05.00 ./mozilla_abridged_certs_generated.h.stub
+ 2:05.30 ./qwac_trust_anchors_ffi_generated.h.stub
+ 2:05.33 ./mls_gk_ffi_generated.h.stub
+ 2:05.38 ./dap_ffi_generated.h.stub
+ 2:05.68 ./fog_ffi_generated.h.stub
+ 2:05.70 ./jog_ffi_generated.h.stub
+ 2:05.71 ./GleanMetrics.h.stub
+ 2:05.79 ./GleanJSMetricsLookup.cpp.stub
+ 2:06.02 ./metrics.rs.stub
+ 2:06.03 ./GleanPings.h.stub
+ 2:06.12 ./factory.rs.stub
+ 2:06.78 ./CrashAnnotations.h.stub
+ 2:06.97 ./crash_helper_client_ffi_generated.h.stub
+ 2:07.39 ./crash_helper_ffi_generated.h.stub
+ 2:07.46 ./mozannotation_client_ffi_generated.h.stub
+ 2:07.77 ./rust_minidump_writer_linux_ffi_generated.h.stub
+ 2:07.86 ./profiler_ffi_generated.h.stub
+ 2:08.25 ./gk_rust_utils_ffi_generated.h.stub
+ 2:08.38 ./application.ini.h.stub
+ 2:11.65 WARNING: mkdir -dot- requested by /usr/bin/gmake -C /app/obj-x86_64-pc-linux-gnu/config/makefiles/xpidl xpidl
+ 2:11.65 config/makefiles/xpidl/Bits.xpt
+ 2:11.65 config/makefiles/xpidl/accessibility.xptBUILDSTATUS@config/makefiles/xpidl START_xpt Bits.xpt
+ 2:12.03 config/makefiles/xpidl/alerts.xpt
+ 2:12.22 config/makefiles/xpidl/appshell.xpt
+ 2:12.56 config/makefiles/xpidl/appstartup.xpt
+ 2:12.69 config/makefiles/xpidl/autocomplete.xpt
+ 2:12.96 config/makefiles/xpidl/autoplay.xpt
+ 2:13.01 config/makefiles/xpidl/backgroundhangmonitor.xpt
+ 2:13.33 config/makefiles/xpidl/browsercompsbase.xpt
+ 2:13.38 config/makefiles/xpidl/caps.xpt
+ 2:13.66 config/makefiles/xpidl/captivedetect.xpt
+ 2:13.71 config/makefiles/xpidl/cascade_bindings.xpt
+ 2:14.04 config/makefiles/xpidl/chrome.xpt
+ 2:14.13 config/makefiles/xpidl/commandhandler.xpt
+ 2:14.43 config/makefiles/xpidl/commandlines.xpt
+ 2:14.64 config/makefiles/xpidl/composer.xpt
+ 2:15.02 config/makefiles/xpidl/content_events.xpt
+ 2:15.04 config/makefiles/xpidl/content_geckomediaplugins.xpt
+ 2:15.57 config/makefiles/xpidl/dap.xpt
+ 2:15.74 config/makefiles/xpidl/docshell.xpt
+ 2:16.38 config/makefiles/xpidl/dom.xpt
+ 2:16.43 config/makefiles/xpidl/dom_audiochannel.xpt
+ 2:17.45 config/makefiles/xpidl/dom_base.xpt
+ 2:17.76 config/makefiles/xpidl/dom_bindings.xpt
+ 2:17.91 config/makefiles/xpidl/dom_events.xpt
+ 2:18.39 config/makefiles/xpidl/dom_geolocation.xpt
+ 2:18.57 config/makefiles/xpidl/dom_identitycredential.xpt
+ 2:18.72 config/makefiles/xpidl/dom_indexeddb.xpt
+ 2:18.92 config/makefiles/xpidl/dom_localstorage.xpt
+ 2:19.10 config/makefiles/xpidl/dom_media.xpt
+ 2:19.26 config/makefiles/xpidl/dom_network.xpt
+ 2:19.43 config/makefiles/xpidl/dom_notification.xpt
+ 2:19.62 config/makefiles/xpidl/dom_payments.xpt
+ 2:19.76 config/makefiles/xpidl/dom_power.xpt
+ 2:19.97 config/makefiles/xpidl/dom_push.xpt
+ 2:20.31 config/makefiles/xpidl/dom_quota.xpt
+ 2:20.32 config/makefiles/xpidl/dom_security.xpt
+ 2:20.96 config/makefiles/xpidl/dom_serializers.xpt
+ 2:21.14 config/makefiles/xpidl/dom_sidebar.xpt
+ 2:21.68 config/makefiles/xpidl/dom_simpledb.xpt
+ 2:21.78 config/makefiles/xpidl/dom_storage.xpt
+ 2:22.30 config/makefiles/xpidl/dom_system.xpt
+ 2:22.40 config/makefiles/xpidl/dom_webauthn.xpt
+ 2:22.43 config/makefiles/xpidl/dom_webspeechrecognition.xpt
+ 2:22.74 config/makefiles/xpidl/dom_webspeechsynth.xpt
+ 2:23.15 config/makefiles/xpidl/dom_workers.xpt
+ 2:23.16 config/makefiles/xpidl/dom_xslt.xpt
+ 2:23.25 config/makefiles/xpidl/dom_xul.xpt
+ 2:23.85 config/makefiles/xpidl/downloads.xpt
+ 2:23.88 config/makefiles/xpidl/editor.xpt
+ 2:23.93 config/makefiles/xpidl/enterprisepolicies.xpt
+ 2:24.32 config/makefiles/xpidl/extensions.xpt
+ 2:24.72 config/makefiles/xpidl/exthandler.xpt
+ 2:24.86 config/makefiles/xpidl/fastfind.xpt
+ 2:24.92 config/makefiles/xpidl/fog.xpt
+ 2:25.41 config/makefiles/xpidl/gfx.xpt
+ 2:25.54 config/makefiles/xpidl/html5.xpt
+ 2:25.69 config/makefiles/xpidl/htmlparser.xpt
+ 2:26.03 config/makefiles/xpidl/http-sfv.xpt
+ 2:26.15 config/makefiles/xpidl/imglib2.xpt
+ 2:26.40 config/makefiles/xpidl/inspector.xpt
+ 2:26.76 config/makefiles/xpidl/intl.xpt
+ 2:26.82 config/makefiles/xpidl/jar.xpt
+ 2:27.29 config/makefiles/xpidl/jsdevtools.xpt
+ 2:27.49 config/makefiles/xpidl/kvstore.xpt
+ 2:27.72 config/makefiles/xpidl/layout_base.xpt
+ 2:27.97 config/makefiles/xpidl/layout_style.xpt
+ 2:28.07 config/makefiles/xpidl/layout_xul_tree.xpt
+ 2:28.14 config/makefiles/xpidl/locale.xpt
+ 2:28.42 config/makefiles/xpidl/loginmgr.xpt
+ 2:28.50 config/makefiles/xpidl/migration.xpt
+ 2:28.56 config/makefiles/xpidl/mimetype.xpt
+ 2:28.82 config/makefiles/xpidl/ml.xpt
+ 2:28.88 config/makefiles/xpidl/mozfind.xpt
+ 2:28.90 config/makefiles/xpidl/mozintl.xpt
+ 2:29.20 config/makefiles/xpidl/necko.xpt
+ 2:29.22 config/makefiles/xpidl/necko_about.xpt
+ 2:29.25 config/makefiles/xpidl/necko_cache2.xpt
+ 2:29.54 config/makefiles/xpidl/necko_cookie.xpt
+ 2:29.58 config/makefiles/xpidl/necko_dns.xpt
+ 2:29.66 config/makefiles/xpidl/necko_file.xpt
+ 2:29.95 config/makefiles/xpidl/necko_http.xpt
+ 2:30.00 config/makefiles/xpidl/necko_res.xpt
+ 2:30.15 config/makefiles/xpidl/necko_socket.xpt
+ 2:30.29 config/makefiles/xpidl/necko_strconv.xpt
+ 2:30.50 config/makefiles/xpidl/necko_viewsource.xpt
+ 2:30.63 config/makefiles/xpidl/necko_websocket.xpt
+ 2:30.90 config/makefiles/xpidl/necko_webtransport.xpt
+ 2:30.91 config/makefiles/xpidl/necko_wifi.xpt
+ 2:31.02 config/makefiles/xpidl/parentalcontrols.xpt
+ 2:31.28 config/makefiles/xpidl/peerconnection.xpt
+ 2:31.31 config/makefiles/xpidl/permissions.xpt
+ 2:31.35 config/makefiles/xpidl/pipnss.xpt
+ 2:31.38 config/makefiles/xpidl/places.xpt
+ 2:31.61 config/makefiles/xpidl/pref.xpt
+ 2:31.66 config/makefiles/xpidl/prefetch.xpt
+ 2:31.67 config/makefiles/xpidl/privateattribution.xpt
+ 2:31.99 config/makefiles/xpidl/profiler.xpt
+ 2:32.05 config/makefiles/xpidl/rdd_process_xpcom_test.xpt
+ 2:32.07 config/makefiles/xpidl/remote.xpt
+ 2:32.07 config/makefiles/xpidl/reputationservice.xpt
+ 2:32.32 config/makefiles/xpidl/sandbox.xpt
+ 2:32.38 config/makefiles/xpidl/satchel.xpt
+ 2:32.39 config/makefiles/xpidl/services.xpt
+ 2:32.42 config/makefiles/xpidl/sessionstore.xpt
+ 2:32.65 config/makefiles/xpidl/shellservice.xpt
+ 2:32.71 config/makefiles/xpidl/shistory.xpt
+ 2:32.72 config/makefiles/xpidl/spellchecker.xpt
+ 2:32.77 config/makefiles/xpidl/startupcache.xpt
+ 2:32.98 config/makefiles/xpidl/storage.xpt
+ 2:33.05 config/makefiles/xpidl/telemetry.xpt
+ 2:33.09 config/makefiles/xpidl/test_necko.xpt
+ 2:33.10 config/makefiles/xpidl/thumbnails.xpt
+ 2:33.29 config/makefiles/xpidl/toolkit_antitracking.xpt
+ 2:33.44 config/makefiles/xpidl/toolkit_asyncshutdown.xpt
+ 2:33.45 config/makefiles/xpidl/toolkit_backgroundtasks.xpt
+ 2:33.59 config/makefiles/xpidl/toolkit_cleardata.xpt
+ 2:33.63 config/makefiles/xpidl/toolkit_contentanalysis.xpt
+ 2:33.79 config/makefiles/xpidl/toolkit_cookiebanners.xpt
+ 2:33.89 config/makefiles/xpidl/toolkit_crashservice.xpt
+ 2:33.93 config/makefiles/xpidl/toolkit_finalizationwitness.xpt
+ 2:33.98 config/makefiles/xpidl/toolkit_media.xpt
+ 2:34.24 config/makefiles/xpidl/toolkit_modules.xpt
+ 2:34.40 config/makefiles/xpidl/toolkit_processtools.xpt
+ 2:34.45 config/makefiles/xpidl/toolkit_resistfingerprinting.xpt
+ 2:34.48 config/makefiles/xpidl/toolkit_search.xpt
+ 2:34.80 config/makefiles/xpidl/toolkit_shell.xpt
+ 2:34.96 config/makefiles/xpidl/toolkit_terminator.xpt
+ 2:34.98 config/makefiles/xpidl/toolkit_xulstore.xpt
+ 2:35.15 config/makefiles/xpidl/toolkitprofile.xpt
+ 2:35.41 config/makefiles/xpidl/toolkitremote.xpt
+ 2:35.53 config/makefiles/xpidl/txmgr.xpt
+ 2:35.54 config/makefiles/xpidl/txtsvc.xpt
+ 2:35.67 config/makefiles/xpidl/uconv.xpt
+ 2:35.98 config/makefiles/xpidl/update.xpt
+ 2:36.00 config/makefiles/xpidl/uriloader.xpt
+ 2:36.05 config/makefiles/xpidl/url-classifier.xpt
+ 2:36.21 config/makefiles/xpidl/urlformatter.xpt
+ 2:36.62 config/makefiles/xpidl/utility_process_xpcom_test.xpt
+ 2:36.70 config/makefiles/xpidl/webBrowser_core.xpt
+ 2:36.89 config/makefiles/xpidl/webbrowserpersist.xpt
+ 2:37.22 config/makefiles/xpidl/webextensions.xpt
+ 2:37.30 config/makefiles/xpidl/webvtt.xpt
+ 2:37.31 config/makefiles/xpidl/widget.xpt
+ 2:37.61 config/makefiles/xpidl/windowcreator.xpt
+ 2:37.84 config/makefiles/xpidl/windowwatcher.xpt
+ 2:37.91 config/makefiles/xpidl/xpcom_base.xpt
+ 2:37.95 config/makefiles/xpidl/xpcom_components.xpt
+ 2:38.34 config/makefiles/xpidl/xpcom_ds.xpt
+ 2:38.65 config/makefiles/xpidl/xpcom_io.xpt
+ 2:38.70 config/makefiles/xpidl/xpcom_system.xpt
+ 2:38.93 config/makefiles/xpidl/xpcom_threads.xpt
+ 2:39.17 config/makefiles/xpidl/xpcomtest.xpt
+ 2:39.45 config/makefiles/xpidl/xpconnect.xpt
+ 2:39.51 config/makefiles/xpidl/xpctest.xpt
+ 2:39.66 config/makefiles/xpidl/xul.xpt
+ 2:39.75 config/makefiles/xpidl/xulapp.xpt
+ 2:39.77 config/makefiles/xpidl/zipwriter.xpt
+ 2:40.24 config/makefiles/xpidl/xptdata.stub
+ 2:41.37 config/external/sqlite/libmozsqlite3.so.symbols.stub
+ 2:41.37 build/unix/elfhack/inject/x86_64.c.stub
+ 2:41.38 build/unix/elfhack
+ 2:41.66 third_party/sqlite3/ext
+ 2:41.70 fts5parse.sql:1042:9: warning: code will never be executed [-Wunreachable-code]
+ 2:41.70  1042 |         fts5YYMINORTYPE fts5yylhsminor;
+ 2:41.70       |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 2:41.74 /app/third_party/sqlite3/ext/sqlite-vec/sqlite-vec.c:1369:5: warning: 'return' will never be executed [-Wunreachable-code-return]
+ 2:41.74  1369 |     return;
+ 2:41.74       |     ^~~~~~
+ 2:41.74 /app/third_party/sqlite3/ext/sqlite-vec/sqlite-vec.c:1361:5: warning: 'return' will never be executed [-Wunreachable-code-return]
+ 2:41.74  1361 |     return;
+ 2:41.74       |     ^~~~~~
+ 2:41.74 /app/third_party/sqlite3/ext/sqlite-vec/sqlite-vec.c:1353:5: warning: 'return' will never be executed [-Wunreachable-code-return]
+ 2:41.74  1353 |     return;
+ 2:41.74       |     ^~~~~~
+ 2:41.83 /app/third_party/sqlite3/ext/sqlite-vec/sqlite-vec.c:6199:24: warning: result of comparison of unsigned expression < 0 is always false [-Wtautological-unsigned-zero-compare]
+ 2:41.83  6199 |       if(metadataInIdx < 0) {
+ 2:41.83       |          ~~~~~~~~~~~~~ ^ ~
+ 2:41.83 /app/third_party/sqlite3/ext/sqlite-vec/sqlite-vec.c:5987:5: warning: code will never be executed [-Wunreachable-code]
+ 2:41.83  5987 |     int nPrefix;
+ 2:41.83       |     ^~~~~~~~~~~~
+ 2:41.85 /app/third_party/sqlite3/ext/sqlite-vec/sqlite-vec.c:6548:7: warning: unused variable 'numValueEntries' [-Wunused-variable]
+ 2:41.85  6548 |   int numValueEntries = (idxStrLength-1) / 4;
+ 2:41.85       |       ^~~~~~~~~~~~~~~
+ 2:43.60 6 warnings generated.
+ 2:43.62 third_party/sqlite3/src
+ 2:44.26 /app/third_party/sqlite3/src/sqlite3.c:90097:3: warning: 'return' will never be executed [-Wunreachable-code-return]
+ 2:44.26  90097 |   return;
+ 2:44.26        |   ^~~~~~
+ 2:44.33 /app/third_party/sqlite3/src/sqlite3.c:94849:10: warning: 'return' will never be executed [-Wunreachable-code-return]
+ 2:44.33  94849 |   return 0;
+ 2:44.33        |          ^
+ 2:44.49 security/nss/lib/nss/out.nss.def.stub
+ 2:44.73 /app/third_party/sqlite3/src/sqlite3.c:157038:10: warning: 'return' will never be executed [-Wunreachable-code-return]
+ 2:44.73  157038 |   return 0;
+ 2:44.73         |          ^
+ 2:44.78 config/external/nspr/ds
+ 2:44.93 /app/third_party/sqlite3/src/sqlite3.c:178953:9: warning: code will never be executed [-Wunreachable-code]
+ 2:44.93  178953 |         YYMINORTYPE yylhsminor;
+ 2:44.93         |         ^~~~~~~~~~~~~~~~~~~~~~~
+ 2:45.13 /app/nsprpub/lib/ds/plvrsion.c:87:15: warning: variable 'dummy' set but not used [-Wunused-but-set-variable]
+ 2:45.13    87 |   const char* dummy;
+ 2:45.13       |               ^
+ 2:45.14 1 warning generated.
+ 2:45.17 config/external/nspr/pr
+ 2:45.88 In file included from Unified_c_external_nspr_pr0.c:11:
+ 2:45.88 /app/nsprpub/pr/src/io/priometh.c:305:38: warning: comparison of integers of different signs: 'PROffset32' (aka 'int') and 'PRSize' (aka 'unsigned long') [-Wsign-compare]
+ 2:45.90   305 |   if (sfd->file_nbytes && (info.size < (sfd->file_offset + sfd->file_nbytes))) {
+ 2:45.90       |                            ~~~~~~~~~ ^  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 2:45.91 In file included from Unified_c_external_nspr_pr0.c:20:
+ 2:45.91 /app/nsprpub/pr/src/io/pripv6.c:133:12: warning: variable 'rv' set but not used [-Wunused-but-set-variable]
+ 2:45.92   133 |   PRStatus rv;
+ 2:45.92       |            ^
+ 2:45.92 /app/nsprpub/pr/src/io/pripv6.c:172:12: warning: variable 'rv' set but not used [-Wunused-but-set-variable]
+ 2:45.94   172 |   PRStatus rv;
+ 2:45.94       |            ^
+ 2:45.94 In file included from Unified_c_external_nspr_pr0.c:29:
+ 2:45.94 /app/nsprpub/pr/src/io/prlayer.c:169:12: warning: variable 'rv' set but not used [-Wunused-but-set-variable]
+ 2:45.94   169 |   PRStatus rv;
+ 2:45.94       |            ^
+ 2:45.94 /app/nsprpub/pr/src/io/prlayer.c:278:12: warning: variable 'rv' set but not used [-Wunused-but-set-variable]
+ 2:45.94   278 |   PRStatus rv;
+ 2:45.94       |            ^
+ 2:46.01 In file included from Unified_c_external_nspr_pr0.c:74:
+ 2:46.02 /app/nsprpub/pr/src/io/prprf.c:319:29: warning: comparison of integers of different signs: 'int' and 'unsigned long' [-Wsign-compare]
+ 2:46.02   319 |   if (amount <= 0 || amount >= sizeof(fin)) {
+ 2:46.02       |                      ~~~~~~ ^  ~~~~~~~~~~~
+ 2:46.02 /app/nsprpub/pr/src/io/prprf.c:938:17: warning: comparison of integers of different signs: 'int' and 'unsigned long' [-Wsign-compare]
+ 2:46.02   938 |           if (i < sizeof(pattern)) {
+ 2:46.02       |               ~ ^ ~~~~~~~~~~~~~~~
+ 2:46.17 In file included from Unified_c_external_nspr_pr0.c:137:
+ 2:46.17 /app/nsprpub/pr/src/md/unix/unix.c:2587:7: warning: variable 'rv' set but not used [-Wunused-but-set-variable]
+ 2:46.17  2587 |   int rv;
+ 2:46.17       |       ^
+ 2:46.19 /app/nsprpub/pr/src/md/unix/unix.c:3250:12: warning: comparison of integers of different signs: 'PRUint32' (aka 'unsigned int') and 'PROffset32' (aka 'int') [-Wsign-compare]
+ 2:46.19  3250 |     if (sz > info.size) {
+ 2:46.19       |         ~~ ^ ~~~~~~~~~
+ 2:47.65 9 warnings generated.
+ 2:47.83 In file included from Unified_c_external_nspr_pr1.c:11:
+ 2:47.83 /app/nsprpub/pr/src/md/unix/uxproces.c:119:5: warning: ignoring return value of function declared with 'warn_unused_result' attribute [-Wunused-result]
+ 2:47.83   119 |     write(pr_wp.pipefd[1], "", 1);
+ 2:47.83       |     ^~~~~ ~~~~~~~~~~~~~~~~~~~~~~
+ 2:47.85 /app/nsprpub/pr/src/md/unix/uxproces.c:655:7: warning: variable 'rv' set but not used [-Wunused-but-set-variable]
+ 2:47.85   655 |   int rv;
+ 2:47.85       |       ^
+ 2:47.85 /app/nsprpub/pr/src/md/unix/uxproces.c:672:7: warning: variable 'rv' set but not used [-Wunused-but-set-variable]
+ 2:47.85   672 |   int rv;
+ 2:47.85       |       ^
+ 2:47.93 In file included from Unified_c_external_nspr_pr1.c:65:
+ 2:47.93 /app/nsprpub/pr/src/misc/prdtoa.c:566:52: warning: comparison of integers of different signs: 'long' and 'unsigned long' [-Wsign-compare]
+ 2:47.93   566 |     if (k <= Kmax && pmem_next - private_mem + len <= PRIVATE_mem) {
+ 2:47.93       |                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ^  ~~~~~~~~~~~
+ 2:48.04 /app/nsprpub/pr/src/misc/prdtoa.c:2704:64: warning: comparison of integers of different signs: 'unsigned long' and 'int' [-Wsign-compare]
+ 2:48.04  2704 |   for (k = 0; sizeof(Bigint) - sizeof(ULong) - sizeof(int) + j <= i; j <<= 1) {
+ 2:48.04       |               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ^  ~
+ 2:48.76 1 warning generated.
+ 2:48.87 In file included from Unified_c_external_nspr_pr2.c:2:
+ 2:48.87 /app/nsprpub/pr/src/misc/prnetdb.c:641:15: warning: comparison of integers of different signs: 'PRIntn' (aka 'int') and 'unsigned long' [-Wsign-compare]
+ 2:48.87   641 |   if (bufsize > sizeof(localbuf)) {
+ 2:48.87       |       ~~~~~~~ ^ ~~~~~~~~~~~~~~~~
+ 2:48.87 /app/nsprpub/pr/src/misc/prnetdb.c:825:15: warning: comparison of integers of different signs: 'PRIntn' (aka 'int') and 'unsigned long' [-Wsign-compare]
+ 2:48.87   825 |   if (bufsize > sizeof(localbuf)) {
+ 2:48.87       |       ~~~~~~~ ^ ~~~~~~~~~~~~~~~~
+ 2:48.87 /app/nsprpub/pr/src/misc/prnetdb.c:1011:15: warning: comparison of integers of different signs: 'PRIntn' (aka 'int') and 'unsigned long' [-Wsign-compare]
+ 2:48.87  1011 |   if (bufsize > sizeof(localbuf)) {
+ 2:48.87       |       ~~~~~~~ ^ ~~~~~~~~~~~~~~~~
+ 2:48.94 In file included from Unified_c_external_nspr_pr2.c:38:
+ 2:48.94 /app/nsprpub/pr/src/misc/prtpool.c:387:16: warning: variable 'rval_status' set but not used [-Wunused-but-set-variable]
+ 2:48.94   387 |       PRStatus rval_status;
+ 2:48.94       |                ^
+ 2:48.95 /app/nsprpub/pr/src/misc/prtpool.c:958:12: warning: variable 'rval_status' set but not used [-Wunused-but-set-variable]
+ 2:48.95   958 |   PRStatus rval_status;
+ 2:48.95       |            ^
+ 2:48.96 /app/nsprpub/pr/src/misc/prtpool.c:1080:12: warning: variable 'rval_status' set but not used [-Wunused-but-set-variable]
+ 2:48.96  1080 |   PRStatus rval_status;
+ 2:48.96       |            ^
+ 2:48.97 In file included from Unified_c_external_nspr_pr2.c:47:
+ 2:48.97 /app/nsprpub/pr/src/pthreads/ptio.c:560:10: warning: comparison of integers of different signs: 'int' and 'PRSize' (aka 'unsigned long') [-Wsign-compare]
+ 2:48.97   560 |   if (-1 == op->result.code) {
+ 2:48.97       |       ~~ ^  ~~~~~~~~~~~~~~~
+ 2:48.97 /app/nsprpub/pr/src/pthreads/ptio.c:577:15: warning: comparison of integers of different signs: 'int' and 'PRSize' (aka 'unsigned long') [-Wsign-compare]
+ 2:48.97   577 |   return ((-1 == op->result.code) &&
+ 2:48.97       |            ~~ ^  ~~~~~~~~~~~~~~~
+ 2:48.98 /app/nsprpub/pr/src/pthreads/ptio.c:600:15: warning: comparison of integers of different signs: 'int' and 'PRSize' (aka 'unsigned long') [-Wsign-compare]
+ 2:48.98   600 |   return ((-1 == op->result.code) &&
+ 2:48.98       |            ~~ ^  ~~~~~~~~~~~~~~~
+ 2:48.98 /app/nsprpub/pr/src/pthreads/ptio.c:700:35: warning: comparison of integers of different signs: 'PRIntn' (aka 'int') and 'PRSize' (aka 'unsigned long') [-Wsign-compare]
+ 2:48.98   700 |     for (iov_index = 0; iov_index < op->arg3.amount; ++iov_index) {
+ 2:48.98       |                         ~~~~~~~~~ ^ ~~~~~~~~~~~~~~~
+ 2:48.98 /app/nsprpub/pr/src/pthreads/ptio.c:702:17: warning: comparison of integers of different signs: 'PRIntn' (aka 'int') and 'size_t' (aka 'unsigned long') [-Wsign-compare]
+ 2:48.98   702 |       if (bytes < iov[iov_index].iov_len) {
+ 2:48.98       |           ~~~~~ ^ ~~~~~~~~~~~~~~~~~~~~~~
+ 2:48.98 /app/nsprpub/pr/src/pthreads/ptio.c:751:15: warning: comparison of integers of different signs: 'int' and 'PRSize' (aka 'unsigned long') [-Wsign-compare]
+ 2:48.98   751 |   return ((-1 == op->result.code) &&
+ 2:48.98       |            ~~ ^  ~~~~~~~~~~~~~~~
+ 2:48.98 /app/nsprpub/pr/src/pthreads/ptio.c:914:9: warning: variable 'oldoffset' set but not used [-Wunused-but-set-variable]
+ 2:48.98   914 |   off_t oldoffset;
+ 2:48.98       |         ^
+ 2:48.98 /app/nsprpub/pr/src/pthreads/ptio.c:929:10: warning: comparison of integers of different signs: 'ssize_t' (aka 'long') and 'size_t' (aka 'unsigned long') [-Wsign-compare]
+ 2:48.98   929 |   if (rv < op->count) {
+ 2:48.98       |       ~~ ^ ~~~~~~~~~
+ 2:48.98 /app/nsprpub/pr/src/pthreads/ptio.c:1055:27: warning: comparison of integers of different signs: 'unsigned int' and 'PRInt32' (aka 'int') [-Wsign-compare]
+ 2:48.98  1055 |       ((_PR_FILEDESC_OPEN != fd->secret->state) &&
+ 2:48.98       |         ~~~~~~~~~~~~~~~~~ ^  ~~~~~~~~~~~~~~~~~
+ 2:48.98 /app/nsprpub/pr/src/pthreads/ptio.c:1064:25: warning: comparison of integers of different signs: 'unsigned int' and 'PRInt32' (aka 'int') [-Wsign-compare]
+ 2:48.98  1064 |   if (_PR_FILEDESC_OPEN == fd->secret->state) {
+ 2:48.98       |       ~~~~~~~~~~~~~~~~~ ^  ~~~~~~~~~~~~~~~~~
+ 2:48.99 /app/nsprpub/pr/src/pthreads/ptio.c:1183:19: warning: comparison of integers of different signs: 'PRInt32' (aka 'int') and 'size_t' (aka 'unsigned long') [-Wsign-compare]
+ 2:48.99  1183 |         if (bytes < osiov->iov_len) {
+ 2:48.99       |             ~~~~~ ^ ~~~~~~~~~~~~~~
+ 2:48.99 /app/nsprpub/pr/src/pthreads/ptio.c:2487:12: warning: comparison of integers of different signs: 'ssize_t' (aka 'long') and 'size_t' (aka 'unsigned long') [-Wsign-compare]
+ 2:49.00  2487 |     if (rv < file_nbytes_to_send) {
+ 2:49.00       |         ~~ ^ ~~~~~~~~~~~~~~~~~~~
+ 2:49.01 /app/nsprpub/pr/src/pthreads/ptio.c:3654:16: warning: comparison of integers of different signs: 'PRIntn' (aka 'int') and 'PRUint32' (aka 'unsigned int') [-Wsign-compare]
+ 2:49.01  3654 |       if (npds > me->syspoll_count) {
+ 2:49.01       |           ~~~~ ^ ~~~~~~~~~~~~~~~~~
+ 2:49.02 /app/nsprpub/pr/src/pthreads/ptio.c:3708:34: warning: comparison of integers of different signs: 'unsigned int' and 'PRInt32' (aka 'int') [-Wsign-compare]
+ 2:49.02  3708 |               (_PR_FILEDESC_OPEN == bottom->secret->state)) {
+ 2:49.02       |                ~~~~~~~~~~~~~~~~~ ^  ~~~~~~~~~~~~~~~~~~~~~
+ 2:49.02 /app/nsprpub/pr/src/pthreads/ptio.c:4176:21: warning: comparison of integers of different signs: 'rlim_t' (aka 'unsigned long') and 'PRIntn' (aka 'int') [-Wsign-compare]
+ 2:49.02  4176 |   if (rlim.rlim_max < table_size) {
+ 2:49.02       |       ~~~~~~~~~~~~~ ^ ~~~~~~~~~~
+ 2:49.04 In file included from Unified_c_external_nspr_pr2.c:65:
+ 2:49.04 /app/nsprpub/pr/src/pthreads/ptsynch.c:46:7: warning: variable 'rv' set but not used [-Wunused-but-set-variable]
+ 2:49.04    46 |   int rv;
+ 2:49.04       |       ^
+ 2:49.04 /app/nsprpub/pr/src/pthreads/ptsynch.c:62:17: warning: variable 'rv' set but not used [-Wunused-but-set-variable]
+ 2:49.04    62 |   PRIntn index, rv;
+ 2:49.04       |                 ^
+ 2:49.04 /app/nsprpub/pr/src/pthreads/ptsynch.c:122:10: warning: variable 'rv' set but not used [-Wunused-but-set-variable]
+ 2:49.04   122 |   PRIntn rv;
+ 2:49.04       |          ^
+ 2:49.04 /app/nsprpub/pr/src/pthreads/ptsynch.c:141:10: warning: variable 'rv' set but not used [-Wunused-but-set-variable]
+ 2:49.04   141 |   PRIntn rv;
+ 2:49.04       |          ^
+ 2:49.04 /app/nsprpub/pr/src/pthreads/ptsynch.c:159:10: warning: variable 'rv' set but not used [-Wunused-but-set-variable]
+ 2:49.04   159 |   PRIntn rv;
+ 2:49.04       |          ^
+ 2:49.04 /app/nsprpub/pr/src/pthreads/ptsynch.c:179:10: warning: variable 'rv' set but not used [-Wunused-but-set-variable]
+ 2:49.04   179 |   PRIntn rv;
+ 2:49.04       |          ^
+ 2:49.04 /app/nsprpub/pr/src/pthreads/ptsynch.c:433:10: warning: variable 'rv' set but not used [-Wunused-but-set-variable]
+ 2:49.04   433 |   PRIntn rv;
+ 2:49.04       |          ^
+ 2:49.04 /app/nsprpub/pr/src/pthreads/ptsynch.c:511:7: warning: variable 'rv' set but not used [-Wunused-but-set-variable]
+ 2:49.05   511 |   int rv;
+ 2:49.05       |       ^
+ 2:49.05 /app/nsprpub/pr/src/pthreads/ptsynch.c:533:10: warning: variable 'rv' set but not used [-Wunused-but-set-variable]
+ 2:49.05   533 |   PRIntn rv;
+ 2:49.05       |          ^
+ 2:49.05 /app/nsprpub/pr/src/pthreads/ptsynch.c:560:10: warning: variable 'rv' set but not used [-Wunused-but-set-variable]
+ 2:49.05   560 |   PRIntn rv;
+ 2:49.05       |          ^
+ 2:49.05 /app/nsprpub/pr/src/pthreads/ptsynch.c:587:10: warning: variable 'rv' set but not used [-Wunused-but-set-variable]
+ 2:49.05   587 |   PRIntn rv;
+ 2:49.05       |          ^
+ 2:49.06 /app/nsprpub/pr/src/pthreads/ptsynch.c:925:41: warning: passing object of class type 'union semun' through variadic function [-Wclass-varargs]
+ 2:49.06   925 |       if (semctl(sem->semid, 0, SETVAL, arg) == -1) {
+ 2:49.06       |                                         ^
+ 2:49.06 /app/nsprpub/pr/src/pthreads/ptsynch.c:957:37: warning: passing object of class type 'union semun' through variadic function [-Wclass-varargs]
+ 2:49.06   957 |     semctl(sem->semid, 0, IPC_STAT, arg);
+ 2:49.06       |                                     ^
+ 2:49.06 /app/nsprpub/pr/src/pthreads/ptsynch.c:1028:34: warning: passing object of class type 'union semun' through variadic function [-Wclass-varargs]
+ 2:49.06  1028 |   if (semctl(semid, 0, IPC_RMID, unused) == -1) {
+ 2:49.06       |                                  ^
+ 2:49.07 /app/nsprpub/pr/src/pthreads/ptsynch.c:1107:7: warning: variable 'rv' set but not used [-Wunused-but-set-variable]
+ 2:49.07  1107 |   int rv;
+ 2:49.07       |       ^
+ 2:49.07 /app/nsprpub/pr/src/pthreads/ptsynch.c:1135:7: warning: variable 'rv' set but not used [-Wunused-but-set-variable]
+ 2:49.07  1135 |   int rv;
+ 2:49.07       |       ^
+ 2:49.07 /app/nsprpub/pr/src/pthreads/ptsynch.c:1143:7: warning: variable 'rv' set but not used [-Wunused-but-set-variable]
+ 2:49.07  1143 |   int rv;
+ 2:49.07       |       ^
+ 2:49.07 In file included from Unified_c_external_nspr_pr2.c:74:
+ 2:49.07 /app/nsprpub/pr/src/pthreads/ptthread.c:208:29: warning: comparison of integers of different signs: 'PRInt32' (aka 'int') and 'PRUintn' (aka 'unsigned int') [-Wsign-compare]
+ 2:49.08   208 |   } else if (--pt_book.user == pt_book.this_many) {
+ 2:49.08       |              ~~~~~~~~~~~~~~ ^  ~~~~~~~~~~~~~~~~~
+ 2:49.08 /app/nsprpub/pr/src/pthreads/ptthread.c:260:9: warning: variable 'rv' set but not used [-Wunused-but-set-variable]
+ 2:49.08   260 |     int rv;
+ 2:49.08       |         ^
+ 2:49.08 /app/nsprpub/pr/src/pthreads/ptthread.c:449:33: warning: comparison of integers of different signs: 'PRInt32' (aka 'int') and 'PRUintn' (aka 'unsigned int') [-Wsign-compare]
+ 2:49.08   449 |       } else if (--pt_book.user == pt_book.this_many) {
+ 2:49.08       |                  ~~~~~~~~~~~~~~ ^  ~~~~~~~~~~~~~~~~~
+ 2:49.08 /app/nsprpub/pr/src/pthreads/ptthread.c:570:7: warning: variable 'rv' set but not used [-Wunused-but-set-variable]
+ 2:49.08   570 |   int rv;
+ 2:49.08       |       ^
+ 2:49.09 /app/nsprpub/pr/src/pthreads/ptthread.c:705:12: warning: variable 'rv' set but not used [-Wunused-but-set-variable]
+ 2:49.09   705 |     PRIntn rv;
+ 2:49.09       |            ^
+ 2:49.09 /app/nsprpub/pr/src/pthreads/ptthread.c:771:7: warning: variable 'rv' set but not used [-Wunused-but-set-variable]
+ 2:49.09   771 |   int rv;
+ 2:49.09       |       ^
+ 2:49.09 /app/nsprpub/pr/src/pthreads/ptthread.c:961:7: warning: variable 'rv' set but not used [-Wunused-but-set-variable]
+ 2:49.09   961 |   int rv;
+ 2:49.09       |       ^
+ 2:49.09 /app/nsprpub/pr/src/pthreads/ptthread.c:993:7: warning: variable 'rv' set but not used [-Wunused-but-set-variable]
+ 2:49.09   993 |   int rv;
+ 2:49.09       |       ^
+ 2:49.09 /app/nsprpub/pr/src/pthreads/ptthread.c:998:25: warning: comparison of integers of different signs: 'PRInt32' (aka 'int') and 'PRUintn' (aka 'unsigned int') [-Wsign-compare]
+ 2:49.10   998 |     while (pt_book.user > pt_book.this_many) {
+ 2:49.10       |            ~~~~~~~~~~~~ ^ ~~~~~~~~~~~~~~~~~
+ 2:49.10 /app/nsprpub/pr/src/pthreads/ptthread.c:1104:10: warning: variable 'rv' set but not used [-Wunused-but-set-variable]
+ 2:49.10  1104 |   PRIntn rv;
+ 2:49.10       |          ^
+ 2:49.10 /app/nsprpub/pr/src/pthreads/ptthread.c:1296:10: warning: variable 'rv' set but not used [-Wunused-but-set-variable]
+ 2:49.10  1296 |   PRIntn rv;
+ 2:49.10       |          ^
+ 2:49.10 /app/nsprpub/pr/src/pthreads/ptthread.c:1397:7: warning: variable 'rv' set but not used [-Wunused-but-set-variable]
+ 2:49.10  1397 |   int rv;
+ 2:49.10       |       ^
+ 2:49.17 5 warnings generated.
+ 2:49.19 clang: warning: argument unused during compilation: '-D MOZILLA_CLIENT' [-Wunused-command-line-argument]
+ 2:49.19 clang: warning: argument unused during compilation: '-include /app/obj-x86_64-pc-linux-gnu/mozilla-config.h' [-Wunused-command-line-argument]
+ 2:49.22 config/external/nspr/libc
+ 2:49.44 /app/nsprpub/lib/libc/src/plgetopt.c:149:40: warning: comparison of integers of different signs: 'unsigned long' and 'PRIntn' (aka 'int') [-Wsign-compare]
+ 2:49.44   149 |       if (strlen(longOpt->longOptName) != optNameLen) {
+ 2:49.44       |           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ^  ~~~~~~~~~~
+ 2:49.47 1 warning generated.
+ 2:49.51 /app/nsprpub/lib/libc/src/plvrsion.c:87:15: warning: variable 'dummy' set but not used [-Wunused-but-set-variable]
+ 2:49.51    87 |   const char* dummy;
+ 2:49.51       |               ^
+ 2:49.51 1 warning generated.
+ 2:50.13 security/nss/lib/base
+ 2:50.81 50 warnings generated.
+ 2:50.84 security/nss/lib/certdb
+ 2:51.03 security/nss/lib/certhigh
+ 2:53.20 security/nss/lib/cryptohi
+ 2:54.21 security/nss/lib/dev
+ 2:54.29 security/nss/lib/nss
+ 2:54.43    Compiling unicode-ident v1.0.6
+ 2:55.03 security/nss/lib/pk11wrap
+ 2:55.19 security/nss/lib/pki
+ 2:55.61    Compiling proc-macro2 v1.0.101
+ 2:57.44 security/nss/lib/util/out.nssutil.def.stub
+ 2:58.06 security/nss/lib/util
+ 3:01.62    Compiling quote v1.0.40
+ 3:02.36    Compiling syn v2.0.106
+ 3:02.55 security/nss/lib/smime/out.smime.def.stub
+ 3:02.67    Compiling serde_core v1.0.227
+ 3:02.90    Compiling serde v1.0.227
+ 3:03.65    Compiling cfg-if v1.0.0
+ 3:03.78    Compiling libc v0.2.176
+ 3:09.56    Compiling autocfg v1.1.0 (/app/third_party/rust/autocfg)
+ 3:11.01    Compiling shlex v1.3.0
+ 3:11.50    Compiling thiserror v2.0.12
+ 3:12.03    Compiling bitflags v2.9.0
+ 3:13.07    Compiling log v0.4.26
+ 3:13.42    Compiling memchr v2.7.4
+ 3:15.06    Compiling synstructure v0.13.1
+ 3:16.78    Compiling equivalent v1.0.1
+ 3:16.86    Compiling foldhash v0.2.0
+ 3:17.20    Compiling minimal-lexical v0.2.1
+ 3:17.55    Compiling nom v7.1.3
+ 3:19.79    Compiling stable_deref_trait v1.2.0
+ 3:19.89    Compiling mozbuild v0.1.0 (/app/build/rust/mozbuild)
+ 3:20.23    Compiling glob v0.3.1
+ 3:20.72    Compiling winnow v0.7.13
+ 3:21.33    Compiling rustc-hash v2.1.1
+ 3:21.47    Compiling toml_datetime v0.7.3
+ 3:21.94    Compiling serde_spanned v1.0.3
+ 3:22.07    Compiling toml_writer v1.0.4
+ 3:22.34    Compiling itoa v1.0.15
+ 3:22.54    Compiling once_cell v1.21.3
+ 3:22.85    Compiling getrandom v0.3.3
+ 3:23.13 4 warnings generated.
+ 3:23.16    Compiling toml_parser v1.0.4
+ 3:23.58    Compiling siphasher v1.0.1
+ 3:23.82    Compiling toml v0.9.8
+ 3:23.91    Compiling fastrand v2.1.1
+ 3:24.22    Compiling anyhow v1.0.69
+ 3:24.92    Compiling jobserver v0.1.33
+ 3:25.53    Compiling toml v0.5.999 (/app/build/rust/toml)
+ 3:25.61    Compiling semver v1.0.16
+ 3:26.07    Compiling rustix v0.38.39
+ 3:26.21    Compiling libm v0.2.6
+ 3:26.55    Compiling cc v1.2.30
+ 3:26.72    Compiling serde_json v1.0.140
+ 3:28.43    Compiling ryu v1.0.12
+ 3:28.74    Compiling either v1.8.1
+ 3:28.93    Compiling itertools v0.14.0
+ 3:29.79    Compiling heck v0.5.0
+ 3:30.89    Compiling encoding_rs v0.8.35
+ 3:31.32    Compiling writeable v0.6.1
+ 3:32.09    Compiling num-traits v0.2.19
+ 3:32.43    Compiling hashbrown v0.16.0
+ 3:33.82    Compiling camino v1.1.2
+ 3:34.34    Compiling litemap v0.8.0
+ 3:34.69    Compiling indexmap v2.11.4
+ 3:35.74    Compiling linux-raw-sys v0.4.14
+ 3:36.35    Compiling siphasher v0.3.999 (/app/build/rust/siphasher)
+ 3:36.42    Compiling getrandom v0.2.999 (/app/build/rust/getrandom)
+ 3:36.49    Compiling clang-sys v1.7.0
+ 3:36.80    Compiling pkg-config v0.3.26
+ 3:36.86    Compiling lazy_static v1.4.0
+ 3:36.94    Compiling fs-err v2.9.0
+ 3:37.38    Compiling aho-corasick v1.1.0
+ 3:38.38    Compiling tempfile v3.16.0
+ 3:38.63    Compiling serde_derive v1.0.227
+ 3:39.50    Compiling thiserror-impl v2.0.12
+ 3:40.06    Compiling zerofrom-derive v0.1.3
+ 3:44.66    Compiling yoke-derive v0.8.0
+ 3:48.20    Compiling displaydoc v0.2.4
+ 3:51.36    Compiling zerovec-derive v0.11.1
+ 3:51.42    Compiling zerofrom v0.1.4
+ 3:51.54    Compiling uniffi_internal_macros v0.29.3
+ 3:54.39    Compiling smallvec v1.15.1
+ 3:54.66    Compiling allocator-api2 v0.2.21 (https://github.com/glandium/allocator-api2?rev=ad5f3d56a5a4519eff52af4ff85293431466ef5c#ad5f3d56)
+ 3:54.70    Compiling yoke v0.8.0
+ 3:54.93    Compiling zerotrie v0.2.2
+ 3:56.58    Compiling uniffi_pipeline v0.29.3
+ 3:56.70    Compiling zerovec v0.11.4
+ 3:57.12    Compiling uniffi_meta v0.29.3
+ 3:57.44    Compiling nsstring v0.1.0 (/app/xpcom/rust/nsstring)
+ 3:58.13    Compiling tinystr v0.8.1
+ 3:58.37    Compiling icu_locale_core v2.0.0
+ 3:59.03    Compiling potential_utf v0.1.2
+ 3:59.31    Compiling icu_collections v2.0.0
+ 4:00.84    Compiling icu_provider v2.0.0
+ 4:02.29    Compiling scroll_derive v0.12.0
+ 4:02.93    Compiling regex-syntax v0.8.5
+ 4:04.21    Compiling libloading v0.8.6
+ 4:04.25    Compiling bindgen v0.72.0 (https://github.com/rust-lang/rust-bindgen?rev=9366e0af8da529c958b4cd4fcbe492d951c86f5c#9366e0af)
+ 4:04.35    Compiling uniffi_macros v0.29.3
+ 4:04.48    Compiling regex-automata v0.4.9
+ 4:10.85    Compiling regex v1.11.1
+ 4:11.99    Compiling cexpr v0.6.0
+ 4:20.90    Compiling icu_properties_data v2.0.1
+ 4:21.24    Compiling version_check v0.9.4
+ 4:22.55    Compiling thin-vec v0.2.14 (/app/third_party/rust/thin-vec)
+ 4:23.08    Compiling unicode-bidi v0.3.15 (https://github.com/servo/unicode-bidi?rev=ca612daf1c08c53abe07327cb3e6ef6e0a760f0c#ca612daf)
+ 4:23.10    Compiling utf8_iter v1.0.4
+ 4:23.26    Compiling scopeguard v1.1.0
+ 4:23.42    Compiling static_assertions v1.1.0
+ 4:23.96    Compiling icu_properties v2.0.1
+ 4:24.77    Compiling icu_normalizer_data v2.0.0
+ 4:26.09    Compiling icu_normalizer v2.0.0
+ 4:26.53    Compiling percent-encoding v2.3.2
+ 4:26.83    Compiling typenum v1.16.0
+ 4:27.79    Compiling idna_adapter v1.2.1
+ 4:28.04    Compiling bytes v1.4.0
+ 4:28.67    Compiling idna v1.1.0
+ 4:28.92    Compiling scroll v0.12.0
+ 4:28.99    Compiling basic-toml v0.1.2
+ 4:29.21    Compiling askama_parser v0.13.0
+ 4:31.51    Compiling smawk v0.3.2
+ 4:31.61    Compiling plain v0.2.3
+ 4:31.64    Compiling textwrap v0.16.1
+ 4:31.70    Compiling goblin v0.9.2
+ 4:34.04    Compiling form_urlencoded v1.2.2
+ 4:34.35    Compiling weedle2 v5.0.0
+ 4:41.74    Compiling uniffi_udl v0.29.3
+ 4:43.31    Compiling askama_derive v0.13.1
+ 4:45.51    Compiling goblin v0.8.999 (/app/build/rust/goblin)
+ 4:45.58    Compiling url v2.5.7
+ 4:46.09    Compiling nserror v0.1.0 (/app/xpcom/rust/nserror)
+ 4:46.33    Compiling generic-array v0.14.6
+ 4:46.70    Compiling crossbeam-utils v0.8.21
+ 4:49.62    Compiling cargo-platform v0.1.2
+ 4:50.82    Compiling byteorder v1.5.0
+ 4:51.11    Compiling uniffi_core v0.29.3
+ 4:51.53    Compiling cargo_metadata v0.19.2
+ 4:52.76    Compiling ident_case v1.0.1
+ 4:52.87    Compiling fnv v1.0.7
+ 4:52.95    Compiling uniffi v0.29.3
+ 4:53.02    Compiling strsim v0.11.1
+ 4:53.88    Compiling darling_core v0.20.10
+ 4:57.33    Compiling termcolor v1.4.1
+ 4:57.58    Compiling lock_api v0.4.9
+ 4:57.79    Compiling env_logger v0.10.0
+ 4:58.03    Compiling askama v0.13.1
+ 4:58.08    Compiling cstr v0.2.11
+ 4:58.71    Compiling uniffi_bindgen v0.29.3
+ 4:58.82    Compiling cfg_aliases v0.2.1
+ 4:58.89    Compiling pin-project-lite v0.2.14
+ 4:58.97    Compiling parking_lot_core v0.9.10
+ 4:59.43    Compiling xpcom_macros v0.1.0 (/app/xpcom/rust/xpcom/xpcom_macros)
+ 4:59.85    Compiling thiserror v1.999.999 (/app/build/rust/thiserror)
+ 4:59.95    Compiling threadbound v0.1.5
+ 5:02.26    Compiling parking_lot v0.12.3
+ 5:03.77    Compiling vcpkg v0.2.999 (/app/build/rust/vcpkg)
+ 5:03.86    Compiling base64 v0.22.1
+ 5:04.52    Compiling libsqlite3-sys v0.35.0
+ 5:04.86    Compiling xpcom v0.1.0 (/app/xpcom/rust/xpcom)
+ 5:04.91    Compiling uuid v1.3.0
+ 5:05.52    Compiling hex v0.4.3
+ 5:06.00    Compiling bincode v1.3.3
+ 5:07.95    Compiling euclid v0.22.10
+ 5:09.84    Compiling crypto-common v0.1.6
+ 5:09.97    Compiling block-buffer v0.10.3
+ 5:10.12    Compiling rand_core v0.6.4
+ 5:10.42    Compiling tracing-core v0.1.33
+ 5:11.49    Compiling darling_macro v0.20.10
+ 5:11.73    Compiling digest v0.10.7
+ 5:12.02    Compiling tracing-attributes v0.1.28
+ 5:12.76    Compiling darling v0.20.10
+ 5:12.83    Compiling sharded-slab v0.1.7
+ 5:13.95    Compiling thread_local v1.1.8
+ 5:14.44    Compiling async-trait v0.1.68
+ 5:14.87    Compiling tracing-subscriber v0.3.20
+ 5:18.81    Compiling hashlink v0.11.0
+ 5:19.25    Compiling app_units v0.7.8
+ 5:21.66    Compiling tracing v0.1.41
+ 5:22.10    Compiling memoffset v0.9.0
+ 5:22.32    Compiling ppv-lite86 v0.2.17
+ 5:22.74    Compiling rand_chacha v0.3.1
+ 5:23.84    Compiling tracing-support v0.1.0 (https://github.com/mozilla/application-services?rev=799ae231ba91f5b6634672a2737cc9efdf997b70#799ae231)
+ 5:30.68    Compiling error-support-macros v0.1.0 (https://github.com/mozilla/application-services?rev=799ae231ba91f5b6634672a2737cc9efdf997b70#799ae231)
+ 5:32.21    Compiling uniffi_build v0.29.3
+ 5:32.36    Compiling error-support v0.1.0 (https://github.com/mozilla/application-services?rev=799ae231ba91f5b6634672a2737cc9efdf997b70#799ae231)
+ 5:34.86    Compiling rand v0.8.5
+ 5:36.28    Compiling hashlink v0.10.999 (/app/build/rust/hashlink)
+ 5:36.40    Compiling bindgen v0.69.999 (/app/build/rust/bindgen)
+ 5:36.49    Compiling fallible-streaming-iterator v0.1.9
+ 5:36.70    Compiling fallible-iterator v0.3.0
+ 5:37.30    Compiling rusqlite v0.37.0
+ 5:39.32    Compiling malloc_size_of_derive v0.1.3 (/app/xpcom/rust/malloc_size_of_derive)
+ 5:40.60    Compiling ordered-float v3.4.0
+ 5:40.96    Compiling serde_bytes v0.11.9
+ 5:41.22    Compiling cpufeatures v0.2.8
+ 5:41.29    Compiling iana-time-zone v0.1.64
+ 5:41.29    Compiling sha2 v0.10.8
+ 5:41.93    Compiling chrono v0.4.42
+ 5:42.91    Compiling wr_malloc_size_of v0.2.2 (/app/gfx/wr/wr_malloc_size_of)
+ 5:43.10    Compiling base64 v0.21.999 (/app/build/rust/base64)
+ 5:43.17    Compiling slab v0.4.8
+ 5:43.36    Compiling arrayref v0.3.6
+ 5:43.50    Compiling prost-derive v0.13.5
+ 5:44.76    Compiling phf_shared v0.13.1
+ 5:45.07    Compiling id-arena v2.2.1
+ 5:45.23    Compiling rkv v0.20.0
+ 5:46.79    Compiling phf_generator v0.13.1
+ 5:47.48    Compiling gecko-profiler v0.1.0 (/app/tools/profiler/rust-api)
+ 5:48.45    Compiling unic-langid-impl v0.9.6
+ 5:49.18    Compiling arrayvec v0.7.6
+ 5:49.52    Compiling crossbeam-epoch v0.9.14
+ 5:49.87    Compiling simd-adler32 v0.3.7
+ 5:51.12    Compiling adler2 v2.0.1
+ 5:51.27    Compiling miniz_oxide v0.8.9
+ 5:51.55    Compiling unic-langid v0.9.6
+ 5:51.65    Compiling prost v0.13.5
+ 5:52.31    Compiling memoffset v0.8.999 (/app/build/rust/memoffset)
+ 5:52.38    Compiling profiler-macros v0.1.0 (/app/tools/profiler/rust-api/macros)
+ 5:53.35    Compiling ffi-support v0.4.4
+ 5:53.37    Compiling num_cpus v1.16.0
+ 5:53.86    Compiling crc32fast v1.4.2
+ 5:54.15    Compiling pollster v0.3.0
+ 5:54.30    Compiling futures-core v0.3.31
+ 5:54.44    Compiling futures-sink v0.3.31
+ 5:54.47    Compiling rayon-core v1.12.1
+ 5:54.55    Compiling futures-channel v0.3.31
+ 5:54.69    Compiling viaduct v0.1.0 (https://github.com/mozilla/application-services?rev=799ae231ba91f5b6634672a2737cc9efdf997b70#799ae231)
+ 5:54.84    Compiling flate2 v1.1.4
+ 5:56.10    Compiling crossbeam-channel v0.5.15
+ 5:57.00    Compiling hashbrown v0.15.999 (/app/build/rust/hashbrown)
+ 5:57.07    Compiling whatsys v0.3.2
+ 5:57.32    Compiling zeitstempel v0.2.0
+ 5:57.42    Compiling icu_locale_data v2.0.0
+ 5:57.62    Compiling nss_build_common v0.1.0 (https://github.com/mozilla/application-services?rev=799ae231ba91f5b6634672a2737cc9efdf997b70#799ae231)
+ 5:57.91    Compiling nss_sys v0.1.0 (https://github.com/mozilla/application-services?rev=799ae231ba91f5b6634672a2737cc9efdf997b70#799ae231)
+ 5:58.16    Compiling crossbeam-deque v0.8.2
+ 5:58.32    Compiling pkcs11-bindings v0.1.7
+ 5:58.41    Compiling futures-macro v0.3.31
+ 5:58.43    Compiling pin-utils v0.1.0
+ 5:58.50    Compiling rustversion v1.0.19
+ 5:59.19    Compiling futures-task v0.3.31
+ 5:59.27    Compiling cmake v0.1.999 (/app/build/rust/cmake)
+ 5:59.34    Compiling futures-io v0.3.31
+ 5:59.58    Compiling cubeb-sys v0.30.1
+ 6:00.48    Compiling phf_macros v0.13.1
+ 6:01.92    Compiling mls-rs-codec-derive v0.2.0 (https://github.com/beurdouche/mls-rs?rev=c846691feab0f3617c3815c527402bd44d854d74#c846691f)
+ 6:03.71    Compiling futures-util v0.3.31
+ 6:04.50    Compiling static_prefs v0.1.0 (/app/modules/libpref/init/static_prefs)
+ 6:04.59    Compiling zeroize_derive v1.4.2
+ 6:04.91    Compiling inherent v1.0.7
+ 6:07.50    Compiling futures-executor v0.3.28
+ 6:07.62    Compiling phf v0.13.1
+ 6:07.81    Compiling mls-rs-codec v0.6.0 (https://github.com/beurdouche/mls-rs?rev=c846691feab0f3617c3815c527402bd44d854d74#c846691f)
+ 6:08.35    Compiling rayon v1.10.0
+ 6:09.03    Compiling zeroize v1.8.1
+ 6:09.33    Compiling icu_locale v2.0.0
+ 6:11.25    Compiling fluent-langneg v0.13.0
+ 6:11.38    Compiling serde_with_macros v3.12.0
+ 6:11.56    Compiling type-map v0.5.1
+ 6:11.71    Compiling bitflags v1.999.999 (/app/build/rust/bitflags)
+ 6:11.79    Compiling half v2.5.0
+ 6:12.02    Compiling derive_more-impl v2.0.1
+ 6:12.32    Compiling maybe-async v0.2.10
+ 6:18.29    Compiling memmap2 v0.9.3
+ 6:18.63    Compiling dtoa v0.4.8
+ 6:18.66    Compiling smallbitvec v2.5.1
+ 6:18.84    Compiling khronos_api v3.1.0
+ 6:19.07    Compiling paste v1.0.11
+ 6:19.21    Compiling hawk v5.0.1
+ 6:19.41    Compiling async-task v4.3.0
+ 6:19.58    Compiling dtoa-short v0.3.3
+ 6:19.65    Compiling moz_task v0.1.0 (/app/xpcom/rust/moz_task)
+ 6:19.76    Compiling mls-rs-core v0.21.0 (https://github.com/beurdouche/mls-rs?rev=c846691feab0f3617c3815c527402bd44d854d74#c846691f)
+ 6:20.91    Compiling serde_with v3.12.0
+ 6:21.88    Compiling intl-memoizer v0.5.3
+ 6:23.06    Compiling strum_macros v0.27.1
+ 6:23.08    Compiling nss v0.1.0 (https://github.com/mozilla/application-services?rev=799ae231ba91f5b6634672a2737cc9efdf997b70#799ae231)
+ 6:23.54    Compiling derive_more v2.0.1
+ 6:23.68    Compiling futures v0.3.28
+ 6:23.77    Compiling intl_pluralrules v7.0.2
+ 6:24.10    Compiling phf_codegen v0.13.1
+ 6:24.22    Compiling rustc-hash v1.999.999 (/app/build/rust/rustc-hash)
+ 6:24.35    Compiling unicase v2.6.0
+ 6:24.54    Compiling fluent-syntax v0.12.0
+ 6:24.92    Compiling enum-map-derive v0.17.0
+ 6:25.28    Compiling cssparser-macros v0.6.1
+ 6:26.88    Compiling cubeb-core v0.30.1
+ 6:27.07    Compiling core_maths v0.1.0
+ 6:27.15    Compiling neqo-common v0.20.0 (https://github.com/mozilla/neqo?tag=v0.20.0#126b1df9)
+ 6:27.19    Compiling self_cell v1.2.0
+ 6:27.55    Compiling fluent-bundle v0.16.0
+ 6:30.25    Compiling enum-map v2.7.3
+ 6:30.48    Compiling cssparser v0.36.0
+ 6:33.28    Compiling selectors v0.26.0 (/app/servo/components/selectors)
+ 6:34.57    Compiling qlog v0.15.2
+ 6:36.36    Compiling strum v0.27.1

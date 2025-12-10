@@ -16,6 +16,98 @@ export class BrowserTabChild extends JSWindowActorChild {
       case "ForceEncodingDetection":
         docShell.forceEncodingDetection();
         break;
+      case "GravityMode":
+        if (!this.gravityPhysics) {
+          this.gravityPhysics = new GravityPhysics(this.contentWindow);
+        }
+        if (this.gravityPhysics.isActive()) {
+          this.gravityPhysics.stop();
+        } else {
+          this.gravityPhysics.start();
+        }
+        break;
     }
+  }
+}
+
+class GravityPhysics {
+  constructor(win) {
+    this.win = win;
+    this.interval = null;
+    this.elements = [];
+  }
+
+  isActive() {
+    return !!this.interval;
+  }
+
+  start() {
+    if (this.interval) this.stop();
+
+    let doc = this.win.document;
+    if (!doc || !doc.body) return;
+
+    let selectors = "div, p, img, h1, h2, h3, h4, h5, h6, a, span, button, input, li, td, section, article, svg, canvas";
+    let candidates = Array.from(doc.body.querySelectorAll(selectors));
+
+    let initialScrollY = this.win.scrollY;
+
+    this.elements = candidates.map(el => {
+      let rect = el.getBoundingClientRect();
+      if (rect.width === 0 || rect.height === 0) return null;
+
+      return {
+        el,
+        vx: (Math.random() - 0.5) * 5,
+        vy: 0,
+        x: 0,
+        y: 0,
+        rot: 0,
+        vrot: (Math.random() - 0.5) * 5,
+        originalTransform: el.style.transform,
+        originalTransition: el.style.transition,
+        initialBottom: rect.bottom
+      };
+    }).filter(d => d !== null);
+
+    this.elements.forEach(d => {
+      d.el.style.transition = "none";
+    });
+
+    let gravity = 0.5;
+
+    this.interval = this.win.setInterval(() => {
+        let floor = this.win.innerHeight;
+        let scrollDiff = this.win.scrollY - initialScrollY;
+
+        this.elements.forEach(d => {
+            d.vy += gravity;
+            d.x += d.vx;
+            d.y += d.vy;
+            d.rot += d.vrot;
+
+            let visualBottom = d.initialBottom + d.y - scrollDiff;
+
+            if (visualBottom >= floor && d.vy > 0) {
+               d.vy *= -0.6;
+               d.vx *= 0.8;
+               d.vrot *= 0.8;
+            }
+
+            d.el.style.transform = `translate(${d.x}px, ${d.y}px) rotate(${d.rot}deg)`;
+        });
+    }, 20);
+  }
+
+  stop() {
+    if (this.interval) {
+      this.win.clearInterval(this.interval);
+      this.interval = null;
+    }
+    this.elements.forEach(d => {
+      d.el.style.transform = d.originalTransform || "";
+      d.el.style.transition = d.originalTransition || "";
+    });
+    this.elements = [];
   }
 }

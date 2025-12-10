@@ -167,6 +167,10 @@ menu-view-repair-text-encoding =
     .label = Repair Text Encoding
     .accesskey = c
 
+menu-view-gravity-mode =
+    .label = Gravity Mode
+    .accesskey = G
+
 ## These should match what Safari and other Apple applications
 ## use on macOS.
 

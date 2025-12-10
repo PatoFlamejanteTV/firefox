@@ -260,6 +260,12 @@ document.addEventListener(
           case "windowRecordingCmd":
             gGfxUtils.toggleWindowRecording();
             break;
+          case "cmd_gravityMode":
+             {
+               let actor = gBrowser.selectedBrowser.browsingContext.currentWindowGlobal.getActor("BrowserTab");
+               actor.sendAsyncMessage("GravityMode");
+             }
+             break;
           case "zoomWindow":
             zoomWindow();
             break;

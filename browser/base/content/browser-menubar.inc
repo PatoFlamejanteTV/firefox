@@ -157,6 +157,10 @@
                               checked="false" data-l10n-id="menu-view-full-zoom-toggle"/>
                   </menupopup>
                 </menu>
+                <menuitem id="menu_gravityMode"
+                          data-l10n-id="menu-view-gravity-mode"
+                          key="key_gravityMode"
+                          command="cmd_gravityMode"/>
                 <menu id="pageStyleMenu" data-l10n-id="menu-view-page-style-menu">
                   <menupopup id="pageStyleMenuPopup">
                     <menuitem id="menu_pageStyleNoStyle"
