@@ -306,6 +306,10 @@ menu-tools-layout-debugger =
     .label = Layout Debugger
     .accesskey = L
 
+menu-tools-gravity-mode =
+    .label = Gravity Mode
+    .accesskey = G
+
 ## Window Menu
 
 menu-window-menu =
