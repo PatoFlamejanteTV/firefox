@@ -40,6 +40,7 @@
     <command id="cmd_CustomizeToolbars" />
     <command id="cmd_toggleOfflineStatus" />
     <command id="cmd_quitApplication" />
+    <command id="cmd_gravityMode" oncommand="GravityMode.toggle();" />
 
     <command id="View:AboutProcesses" />
     <command id="View:PageSource" />
@@ -178,6 +179,7 @@
     <key id="printKb" data-l10n-id="print-shortcut" command="cmd_print"  modifiers="accel"/>
     <key id="key_close" data-l10n-id="close-shortcut" command="cmd_close" modifiers="accel" reserved="true"/>
     <key id="key_closeWindow" data-l10n-id="close-shortcut" command="cmd_closeWindow" modifiers="accel,shift" reserved="true"/>
+    <key id="key_gravityMode" key="G" modifiers="accel,alt" command="cmd_gravityMode"/>
     <key id="key_toggleMute" data-l10n-id="mute-toggle-shortcut" command="cmd_toggleMute" modifiers="control"/>
     <key id="key_undo"
          data-l10n-id="text-action-undo-shortcut"

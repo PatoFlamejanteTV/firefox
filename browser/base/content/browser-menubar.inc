@@ -127,6 +127,10 @@
 
             <menu id="view-menu" data-l10n-id="menu-view">
               <menupopup id="menu_viewPopup">
+                <menuitem id="menu_gravityMode"
+                          label="Gravity Mode"
+                          key="key_gravityMode"
+                          command="cmd_gravityMode"/>
                 <menu id="viewToolbarsMenu" data-l10n-id="menu-view-toolbars-menu">
                   <menupopup id="view-menu-popup">
                     <menuseparator/>
