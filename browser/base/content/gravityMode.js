@@ -58,8 +58,7 @@ window.GravityMode = {
   animate(time) {
     if (!this.enabled) return;
 
-    let dt = (time - this.lastTime) / 16;
-    if (dt > 4) dt = 4;
+    const dt = (time - this.lastTime) / 1000; // Delta time in seconds
     this.lastTime = time;
 
     let height = document.documentElement.clientHeight;
