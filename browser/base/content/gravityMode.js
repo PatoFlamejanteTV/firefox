@@ -71,12 +71,12 @@ window.GravityMode = {
       item.rot += item.vrot * dt;
 
       // Floor collision
-      // We assume the element was initially static.
-      // currentBottom = originalBottom + item.y
-      let currentBottom = item.originalBottom + item.y;
+      let rect = item.node.getBoundingClientRect();
 
-      if (currentBottom >= height) {
-        let overshoot = currentBottom - height;
+      if (rect.bottom >= height) {
+        // Adjust position based on how much the bottom is past the floor.
+        // This is a simplification; a more complex model would be needed for perfect rotation correction.
+        let overshoot = rect.bottom - height;
         item.y -= overshoot;
 
         // Bounce
