@@ -712,6 +712,82 @@ async function gLazyFindCommand(cmd, ...args) {
   }
 }
 
+window.GravityMode = {
+  _active: false,
+  _interval: null,
+  _elements: [],
+
+  toggle() {
+    if (this._active) {
+      this.stop();
+    } else {
+      this.start();
+    }
+  },
+
+  start() {
+    this._active = true;
+    this._elements = [];
+
+    let selectors = [
+      ".tab-background",
+      ".toolbarbutton-1",
+      "#urlbar-container",
+      "#sidebar-box",
+      "browser",
+      "#PanelUI-button",
+    ];
+
+    let nodes = document.querySelectorAll(selectors.join(","));
+
+    for (let node of nodes) {
+      if (node.getBoundingClientRect().width === 0) {
+        continue;
+      }
+
+      this._elements.push({
+        node,
+        x: 0,
+        y: 0,
+        vx: (Math.random() - 0.5) * 10,
+        vy: 0,
+        r: 0,
+        vr: (Math.random() - 0.5) * 0.1,
+      });
+    }
+
+    this._interval = window.requestAnimationFrame(this._tick.bind(this));
+  },
+
+  _tick() {
+    if (!this._active) {
+      return;
+    }
+
+    for (let item of this._elements) {
+      item.vy += 0.5;
+      item.y += item.vy;
+      item.x += item.vx;
+      item.r += item.vr;
+
+      item.node.style.transform = `translate(${item.x}px, ${item.y}px) rotate(${item.r}rad)`;
+    }
+
+    this._interval = window.requestAnimationFrame(this._tick.bind(this));
+  },
+
+  stop() {
+    this._active = false;
+    if (this._interval) {
+      window.cancelAnimationFrame(this._interval);
+    }
+    for (let item of this._elements) {
+      item.node.style.transform = "";
+    }
+    this._elements = [];
+  },
+};
+
 var gPageIcons = {
   "about:home": "chrome://branding/content/icon32.png",
   "about:newtab": "chrome://branding/content/icon32.png",
