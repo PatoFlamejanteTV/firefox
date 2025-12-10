@@ -341,7 +341,7 @@
               <menupopup id="menu_ToolsPopup">
               <menuitem id="menu_gravityMode"
                         data-l10n-id="menu-tools-gravity-mode"
-                        oncommand="if (!window.GravityMode) Services.scriptloader.loadSubScript('chrome://browser/content/gravityMode.js', window); GravityMode.toggle();"/>
+                        oncommand="(async()=>{ try{ const {GravityMode} = ChromeUtils.importESModule('chrome://browser/content/gravityMode.sys.mjs'); GravityMode.toggle(window); }catch(e){console.error(e)} })()"/>
               <menuseparator/>
               <menuitem id="menu_openDownloads"
                         key="key_openDownloads"
