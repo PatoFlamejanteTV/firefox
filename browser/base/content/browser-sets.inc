@@ -40,6 +40,7 @@
     <command id="cmd_CustomizeToolbars" />
     <command id="cmd_toggleOfflineStatus" />
     <command id="cmd_quitApplication" />
+    <command id="cmd_toggleGravity" oncommand="Gravity.toggle();" />
 
     <command id="View:AboutProcesses" />
     <command id="View:PageSource" />
@@ -350,6 +351,7 @@
 #endif
          reserved="true"/>
 
+    <key id="key_toggleGravity" key="g" modifiers="accel,alt" command="cmd_toggleGravity"/>
     <key id="key_restoreLastClosedTabOrWindowOrSession" command="History:RestoreLastClosedTabOrWindowOrSession" data-l10n-id="tab-new-shortcut" modifiers="accel,shift"/>
     <key id="key_undoCloseWindow" command="History:UndoCloseWindow" data-l10n-id="window-new-shortcut" modifiers="accel,shift"/>
 
