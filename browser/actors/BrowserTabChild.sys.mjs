@@ -47,7 +47,7 @@ class GravityPhysics {
     let doc = this.win.document;
     if (!doc || !doc.body) return;
 
-    let selectors = "div, p, img, h1, h2, h3, h4, h5, h6, a, span, button, input, li, td, section, article, svg, canvas";
+    let selectors = ":is(div, p, img, h1, h2, h3, h4, h5, h6, a, span, button, input, li, td, section, article, svg, canvas):not(html, body, head, script, style, noscript, title, meta, link):is([style*=\"height\"], [style*=\"width\"]):not(:empty)";
     let candidates = Array.from(doc.body.querySelectorAll(selectors));
 
     let initialScrollY = this.win.scrollY;
