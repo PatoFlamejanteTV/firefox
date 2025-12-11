@@ -76,27 +76,36 @@ class GravityPhysics {
 
     let gravity = 0.5;
 
-    this.interval = this.win.setInterval(() => {
-        let floor = this.win.innerHeight;
-        let scrollDiff = this.win.scrollY - initialScrollY;
+    let lastTime = 0;
+    const animate = (timestamp) => {
+      if (!this.interval) return; // a way to stop the loop
+      if (!lastTime) lastTime = timestamp;
+      const deltaTime = (timestamp - lastTime) / 20; // Normalize to original 20ms interval
+      lastTime = timestamp;
 
-        this.elements.forEach(d => {
-            d.vy += gravity;
-            d.x += d.vx;
-            d.y += d.vy;
-            d.rot += d.vrot;
+      let floor = this.win.innerHeight;
+      let scrollDiff = this.win.scrollY - initialScrollY;
 
-            let visualBottom = d.initialBottom + d.y - scrollDiff;
+      this.elements.forEach(d => {
+        d.vy += gravity * deltaTime;
+        d.x += d.vx * deltaTime;
+        d.y += d.vy * deltaTime;
+        d.rot += d.vrot * deltaTime;
 
-            if (visualBottom >= floor && d.vy > 0) {
-               d.vy *= -0.6;
-               d.vx *= 0.8;
-               d.vrot *= 0.8;
-            }
+        let visualBottom = d.initialBottom + d.y - scrollDiff;
 
-            d.el.style.transform = `translate(${d.x}px, ${d.y}px) rotate(${d.rot}deg)`;
-        });
-    }, 20);
+        if (visualBottom >= floor && d.vy > 0) {
+          d.vy *= -0.6;
+          d.vx *= 0.8;
+          d.vrot *= 0.8;
+        }
+
+        d.el.style.transform = `translate(${d.x}px, ${d.y}px) rotate(${d.rot}deg)`;
+      });
+
+      this.interval = this.win.requestAnimationFrame(animate);
+    };
+    this.interval = this.win.requestAnimationFrame(animate);
   }
 
   stop() {
