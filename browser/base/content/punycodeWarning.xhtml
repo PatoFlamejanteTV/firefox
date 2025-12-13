@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Security-Policy" content="default-src chrome:; object-src 'none'" />
+    <title>Punycode Warning</title>
+    <link rel="stylesheet" href="chrome://browser/skin/blockedSite.css" type="text/css" media="all" />
+    <link rel="icon" id="favicon" href="chrome://global/skin/icons/warning.svg" />
+    <style>
+      #errorDescriptionContainer {
+        margin-top: 20px;
+      }
+      .danger {
+        background-color: #d70022;
+        color: white;
+      }
+      .danger:hover {
+        background-color: #a4001a;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="errorPageContainer" class="container">
+      <div id="errorTitle" class="title">
+        <h1 class="title-text">Punycode Detected</h1>
+      </div>
+
+      <div id="errorLongContent">
+        <div id="errorShortDesc">
+          <p>This site uses a Punycode domain (starts with <code>xn--</code>).</p>
+        </div>
+
+        <div id="advisoryDesc">
+            <p>This may be a scam (IDN homograph attack). The URL might look like a legitimate site but is actually different.</p>
+        </div>
+
+        <div id="buttons" class="button-container">
+          <button id="goBackButton" class="primary">Go Back</button>
+          <button id="readMoreButton">Read More</button>
+        </div>
+      </div>
+
+      <div id="errorDescriptionContainer" hidden="true">
+        <div class="error-description">
+          <p>Punycode is a way to represent Unicode characters in ASCII. While it is used for legitimate internationalized domain names, scammers can use it to create domains that look visually identical to trusted sites.</p>
+          <p>If you are sure you want to visit this site, click the button below.</p>
+          <button id="proceedButton" class="danger">I understand the risks, proceed</button>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script src="chrome://browser/content/punycodeWarning.js" />
+</html>

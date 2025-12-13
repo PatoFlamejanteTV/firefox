@@ -1,0 +1,18 @@
+2179:   *   nsIWebProgressListener.onLocationChange; see bug 1478348.
+2181:  onLocationChange(aWebProgress, aRequest, aLocationURI, aFlags, aIsSimulated) {
+2223:    // via TabsProgressListener.onLocationChange and we do not want it called twice
+2231:    BookmarkingUI.onLocationChange();
+2256:    gPermissionPanel.onLocationChange();
+2258:    gProtectionsHandler.onLocationChange();
+2260:    BrowserPageActions.onLocationChange();
+2262:    UrlbarProviderSearchTips.onLocationChange(
+2270:      ActionsProviderContextualSearch.onLocationChange(
+2308:    TranslationsParent.onLocationChange(gBrowser.selectedBrowser);
+2400:   *   The nsIWebProgress instance that fired a onLocationChange notification.
+2486:  //  4. Due to the nsIWebProgressListener.onLocationChange notification.
+2562:      FullZoom.onLocationChange(gBrowser.currentURI, true);
+2943:  onLocationChange(aBrowser, aWebProgress, aRequest, aLocationURI, aFlags) {
+2980:    Services.obs.notifyObservers(aBrowser, "mailto::onLocationChange", aFlags);
+2982:    FullZoom.onLocationChange(aLocationURI, false, aBrowser);
+2983:    CaptivePortalWatcher.onLocationChange(aBrowser);
+4471:  onLocationChange(aWebProgress, aRequest, aLocation, aFlags) {
