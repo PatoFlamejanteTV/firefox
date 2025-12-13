@@ -20,6 +20,10 @@ document.addEventListener("DOMContentLoaded", function() {
             let newUrl;
             try {
                 newUrl = new URL(targetUrl);
+                if (newUrl.protocol !== "http:" && newUrl.protocol !== "https:") {
+                    console.error("Invalid protocol in target URL", targetUrl);
+                    return;
+                }
             } catch(e) {
                 console.error("Invalid target URL", targetUrl);
                 return;
