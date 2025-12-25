@@ -6716,9 +6716,10 @@
           metricsContext
         );
         for (const splitViewTab of splitViewTabs) {
-          this.removeFromMultiSelectedTabs(splitViewTab);
+          this.removeFromMultiSelectedTabs(splitViewTab, true);
           this.tabContainer._notifyBackgroundTab(splitViewTab);
         }
+        this._updateMultiselectedTabCloseButtonTooltip();
       } else {
         this.#handleTabMove(
           aTab,
@@ -6751,9 +6752,10 @@
         metricsContext
       );
       for (const splitViewTab of splitViewTabs) {
-        this.removeFromMultiSelectedTabs(splitViewTab);
+        this.removeFromMultiSelectedTabs(splitViewTab, true);
         this.tabContainer._notifyBackgroundTab(splitViewTab);
       }
+      this._updateMultiselectedTabCloseButtonTooltip();
     }
 
     /**
@@ -7054,15 +7056,16 @@
      * collection with how many tabs they will close
      */
     _updateMultiselectedTabCloseButtonTooltip() {
-      const tabCount = gBrowser.selectedTabs.length;
-      gBrowser.selectedTabs.forEach(selectedTab => {
+      const selectedTabs = this.selectedTabs;
+      const tabCount = selectedTabs.length;
+      selectedTabs.forEach(selectedTab => {
         document.l10n.setArgs(selectedTab.querySelector(".tab-close-button"), {
           tabCount,
         });
       });
     }
 
-    addToMultiSelectedTabs(aTab) {
+    addToMultiSelectedTabs(aTab, skipUpdate = false) {
       if (aTab.multiselected) {
         return;
       }
@@ -7077,7 +7080,9 @@
         this._multiSelectChangeAdditions.add(aTab);
       }
 
-      this._updateMultiselectedTabCloseButtonTooltip();
+      if (!skipUpdate) {
+        this._updateMultiselectedTabCloseButtonTooltip();
+      }
     }
 
     /**
@@ -7098,13 +7103,13 @@
           : [Math.max(0, indexOfTab2), indexOfTab1];
 
       for (let i = lowerIndex; i <= higherIndex; i++) {
-        this.addToMultiSelectedTabs(tabs[i]);
+        this.addToMultiSelectedTabs(tabs[i], true);
       }
 
       this._updateMultiselectedTabCloseButtonTooltip();
     }
 
-    removeFromMultiSelectedTabs(aTab) {
+    removeFromMultiSelectedTabs(aTab, skipUpdate = false) {
       if (!aTab.multiselected) {
         return;
       }
@@ -7118,7 +7123,9 @@
         this._multiSelectChangeRemovals.add(aTab);
       }
       // Update labels for Close buttons of the remaining multiselected tabs:
-      this._updateMultiselectedTabCloseButtonTooltip();
+      if (!skipUpdate) {
+        this._updateMultiselectedTabCloseButtonTooltip();
+      }
       // Update the label for the Close button of the tab being removed
       // from the multiselection:
       document.l10n.setArgs(aTab.querySelector(".tab-close-button"), {
@@ -7140,9 +7147,10 @@
       }
 
       for (let tab of this.selectedTabs) {
-        this.removeFromMultiSelectedTabs(tab);
+        this.removeFromMultiSelectedTabs(tab, true);
       }
       this._lastMultiSelectedTabRef = null;
+      this._updateMultiselectedTabCloseButtonTooltip();
     }
 
     selectAllTabs() {
@@ -7228,8 +7236,9 @@
       this.selectedTab = tabs[0];
       if (tabs.length > 1) {
         for (let tab of tabs) {
-          this.addToMultiSelectedTabs(tab);
+          this.addToMultiSelectedTabs(tab, true);
         }
+        this._updateMultiselectedTabCloseButtonTooltip();
       }
     }
 
