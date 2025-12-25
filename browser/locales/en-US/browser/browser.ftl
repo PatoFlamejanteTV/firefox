@@ -1110,6 +1110,7 @@ navbar-downloads =
 
 navbar-overflow-2 =
     .tooltiptext = More tools
+    .aria-label = More tools
 
 # Variables:
 #   $shortcut (String): keyboard shortcut to print the page
@@ -1174,6 +1175,7 @@ private-browsing-indicator-tooltip =
 #   $agentName (String): The name of the DLP agent that is connected
 content-analysis-indicator-tooltip =
     .tooltiptext = Data loss prevention (DLP) by { $agentName }. Click for more info.
+    .aria-label = Data loss prevention (DLP) by { $agentName }
 content-analysis-panel-title = Data protection
 # Variables:
 #   $agentName (String): The name of the DLP agent that is connected

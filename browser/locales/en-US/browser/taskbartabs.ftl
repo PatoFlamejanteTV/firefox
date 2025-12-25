@@ -8,8 +8,10 @@
 
 taskbar-tab-urlbar-button-open =
   .tooltiptext = Add tab to taskbar
+  .aria-label = Add tab to taskbar
 taskbar-tab-urlbar-button-close =
   .tooltiptext = Remove tab from taskbar
+  .aria-label = Remove tab from taskbar
 taskbar-tab-urlbar-button-show = Show Web App page action
 taskbar-tab-urlbar-button-hide = Hide Web App page action
 
@@ -33,8 +35,10 @@ taskbar-tab-shortcut-folder = { -brand-short-name } Web Apps
 
 taskbar-tab-audio-mute =
   .tooltiptext = Mute Tab
+  .aria-label = Mute Tab
 taskbar-tab-audio-unmute =
   .tooltiptext = Unmute Tab
+  .aria-label = Unmute Tab
 
 ## These are used as part of the window title, possibly after the content's
 ## title.
