@@ -138,7 +138,6 @@
 #include "nsILoadURIDelegate.h"
 #include "nsIMultiPartChannel.h"
 #include "nsINestedURI.h"
-#include "nsINetworkPredictor.h"
 #include "nsINode.h"
 #include "nsINSSErrorsService.h"
 #include "nsIObserverService.h"
@@ -2485,6 +2484,36 @@ void nsDocShell::MaybeCreateInitialClientSource(nsIPrincipal* aPrincipal) {
   MaybeInheritController(mInitialClientSource.get(), principal);
 }
 
+void VerifyCientPrincipalInfosMatch(const mozilla::ipc::PrincipalInfo& aLeft,
+                                    const mozilla::ipc::PrincipalInfo& aRight) {
+  // Inheriting a controller when the principals don't match would cause a
+  // crash. Let's do the checks earlier to crash here already instead of
+  // ClientSource::SetController. And assert each condition separately. See bug
+  // 1880012.
+  MOZ_RELEASE_ASSERT(aLeft.type() == aRight.type());
+
+  switch (aLeft.type()) {
+    case mozilla::ipc::PrincipalInfo::TContentPrincipalInfo: {
+      const mozilla::ipc::ContentPrincipalInfo& leftContent =
+          aLeft.get_ContentPrincipalInfo();
+      const mozilla::ipc::ContentPrincipalInfo& rightContent =
+          aRight.get_ContentPrincipalInfo();
+      MOZ_RELEASE_ASSERT(leftContent.attrs() == rightContent.attrs() &&
+                         leftContent.originNoSuffix() ==
+                             rightContent.originNoSuffix());
+      return;
+    }
+    case mozilla::ipc::PrincipalInfo::TNullPrincipalInfo: {
+      // null principal never matches
+      MOZ_RELEASE_ASSERT(false, "Clients have null principals");
+      return;
+    }
+    default: {
+      break;
+    }
+  }
+}
+
 void nsDocShell::MaybeInheritController(
     mozilla::dom::ClientSource* aClientSource, nsIPrincipal* aPrincipal) {
   nsCOMPtr<nsIDocShell> parent = GetInProcessParentDocshell();
@@ -2511,6 +2540,8 @@ void nsDocShell::MaybeInheritController(
     return;
   }
 
+  VerifyCientPrincipalInfosMatch(aClientSource->Info().PrincipalInfo(),
+                                 controller->PrincipalInfo());
   aClientSource->InheritController(controller.ref());
 }
 
@@ -6573,10 +6604,6 @@ nsresult nsDocShell::EndPageLoad(nsIWebProgress* aProgress,
           nsContentUtils::eDOM_PROPERTIES, "UnknownProtocolNavigationPrevented",
           params);
     }
-  } else {
-    // If we have a host
-    nsCOMPtr<nsILoadInfo> loadInfo = aChannel->LoadInfo();
-    PredictorLearnRedirect(url, aChannel, loadInfo->GetOriginAttributes());
   }
 
   if (hadErrorStatus) {
@@ -6613,9 +6640,14 @@ bool nsDocShell::VerifyDocumentViewer() {
   if (mIsBeingDestroyed) {
     return false;
   }
-  // The viewer should be created during docshell initialization. So unless
-  // we're being destroyed, there always needs to be a viewer.
-  MOZ_ASSERT_UNREACHABLE("The content viewer should've been created eagerly.");
+  if (!mInitialized) {
+    // The viewer should be created during docshell initialization. If something
+    // wants a viewer or document, it has to initialize the docshell first.
+    MOZ_ASSERT_UNREACHABLE(
+        "The docshell should be initialized to get a viewer.");
+  } else {
+    NS_WARNING("No document viewer, docshell failed to initialize.");
+  }
   return false;
 }
 
@@ -7895,6 +7927,30 @@ nsresult nsDocShell::CreateDocumentViewer(const nsACString& aContentType,
   bool errorOnLocationChangeNeeded = false;
   nsCOMPtr<nsIChannel> failedChannel = mFailedChannel;
   nsCOMPtr<nsIURI> failedURI;
+
+  // https://html.spec.whatwg.org/#finalize-a-cross-document-navigation
+  // 9. If entryToReplace is null, then: ...
+  //    Otherwise: ...
+  //      4. If historyEntry's document state's origin is same origin with
+  //         entryToReplace's document state's origin, then set
+  //         historyEntry's navigation API key to entryToReplace's
+  //         navigation API key.
+  bool isReplace =
+      mActiveEntry && mLoadingEntry && IsValidLoadType(mLoadType) &&
+      NavigationUtils::NavigationTypeFromLoadType(mLoadType)
+          .map([](auto type) { return type == NavigationType::Replace; })
+          .valueOr(false);
+  if (isReplace) {
+    nsCOMPtr<nsIURI> uri = mActiveEntry->GetURIOrInheritedForAboutBlank();
+    nsCOMPtr<nsIURI> targetURI =
+        mLoadingEntry->mInfo.GetURIOrInheritedForAboutBlank();
+    bool sameOrigin =
+        NS_SUCCEEDED(nsContentUtils::GetSecurityManager()->CheckSameOriginURI(
+            targetURI, uri, false, false));
+    if (sameOrigin) {
+      mLoadingEntry->mInfo.NavigationKey() = mActiveEntry->NavigationKey();
+    }
+  }
 
   if (mLoadType == LOAD_ERROR_PAGE) {
     // We need to set the SH entry and our current URI here and not
@@ -10022,11 +10078,6 @@ nsresult nsDocShell::InternalLoad(nsDocShellLoadState* aLoadState,
   OriginAttributes attrs = GetOriginAttributes();
   attrs.SetFirstPartyDomain(isTopLevelDoc, aLoadState->URI());
 
-  PredictorLearn(aLoadState->URI(), nullptr,
-                 nsINetworkPredictor::LEARN_LOAD_TOPLEVEL, attrs);
-  PredictorPredict(aLoadState->URI(), nullptr,
-                   nsINetworkPredictor::PREDICT_LOAD, attrs, nullptr);
-
   nsCOMPtr<nsIRequest> req;
   rv = DoURILoad(aLoadState, aCacheKey, getter_AddRefs(req));
 
@@ -10867,6 +10918,19 @@ nsresult nsDocShell::DoURILoad(nsDocShellLoadState* aLoadState,
       IsAboutBlankLoadOntoInitialAboutBlank(uri,
                                             aLoadState->PrincipalToInherit()) &&
       !shouldSkipSyncLoadForSHRestore();
+
+  if (!isAboutBlankLoadOntoInitialAboutBlank) {
+    // https://wicg.github.io/document-picture-in-picture/#close-on-navigate
+    if (Document* doc = GetExtantDocument()) {
+      NS_DispatchToMainThread(NS_NewRunnableFunction(
+          "Close PIP window on navigate", [doc = RefPtr(doc)]() {
+            doc->CloseAnyAssociatedDocumentPiPWindows();
+          }));
+    }
+    if (GetBrowsingContext()->GetIsDocumentPiP()) {
+      return NS_OK;
+    }
+  }
 
   // FIXME We still have a ton of codepaths that don't pass through
   //       DocumentLoadListener, so probably need to create session history info
@@ -12847,7 +12911,7 @@ void nsDocShell::MaybeFireTraverseHistory(nsDocShellLoadState* aLoadState) {
                                     ->mInfo.GetURIOrInheritedForAboutBlank();
   if (NS_FAILED(nsContentUtils::GetSecurityManager()->CheckSameOriginURI(
           activeURI, loadingURI,
-          /*reportError=*/true,
+          /*reportError=*/false,
           /*fromPrivateWindow=*/false))) {
     return;
   }

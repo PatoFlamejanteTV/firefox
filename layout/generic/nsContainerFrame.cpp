@@ -74,27 +74,6 @@ void nsContainerFrame::SetInitialChildList(ChildListID aListID,
     MOZ_ASSERT(mFrames.IsEmpty(),
                "unexpected second call to SetInitialChildList");
     mFrames = std::move(aChildList);
-  } else if (aListID == FrameChildListID::Backdrop) {
-    MOZ_ASSERT(StyleDisplay()->mTopLayer != StyleTopLayer::None,
-               "Only top layer frames should have backdrop");
-    MOZ_ASSERT(HasAnyStateBits(NS_FRAME_OUT_OF_FLOW),
-               "Top layer frames should be out-of-flow");
-    MOZ_ASSERT(!GetProperty(BackdropProperty()),
-               "We shouldn't have setup backdrop frame list before");
-#ifdef DEBUG
-    {
-      nsIFrame* placeholder = aChildList.FirstChild();
-      MOZ_ASSERT(aChildList.OnlyChild(), "Should have only one backdrop");
-      MOZ_ASSERT(placeholder->IsPlaceholderFrame(),
-                 "The frame to be stored should be a placeholder");
-      MOZ_ASSERT(static_cast<nsPlaceholderFrame*>(placeholder)
-                     ->GetOutOfFlowFrame()
-                     ->IsBackdropFrame(),
-                 "The placeholder should points to a backdrop frame");
-    }
-#endif
-    nsFrameList* list = new (PresShell()) nsFrameList(std::move(aChildList));
-    SetProperty(BackdropProperty(), list);
   } else {
     MOZ_ASSERT_UNREACHABLE("Unexpected child list");
   }
@@ -242,7 +221,7 @@ void nsContainerFrame::Destroy(DestroyContext& aContext) {
 
   if (MOZ_UNLIKELY(!mProperties.IsEmpty())) {
     using T = mozilla::FrameProperties::UntypedDescriptor;
-    bool hasO = false, hasOC = false, hasEOC = false, hasBackdrop = false;
+    bool hasO = false, hasOC = false, hasEOC = false;
     mProperties.ForEach([&](const T& aProp, uint64_t) {
       if (aProp == OverflowProperty()) {
         hasO = true;
@@ -250,8 +229,6 @@ void nsContainerFrame::Destroy(DestroyContext& aContext) {
         hasOC = true;
       } else if (aProp == ExcessOverflowContainersProperty()) {
         hasEOC = true;
-      } else if (aProp == BackdropProperty()) {
-        hasBackdrop = true;
       }
       return true;
     });
@@ -271,13 +248,6 @@ void nsContainerFrame::Destroy(DestroyContext& aContext) {
     if (hasEOC) {
       SafelyDestroyFrameListProp(aContext, presShell,
                                  ExcessOverflowContainersProperty());
-    }
-
-    MOZ_ASSERT(!GetProperty(BackdropProperty()) ||
-                   StyleDisplay()->mTopLayer != StyleTopLayer::None,
-               "only top layer frame may have backdrop");
-    if (hasBackdrop) {
-      SafelyDestroyFrameListProp(aContext, presShell, BackdropProperty());
     }
   }
 
@@ -303,10 +273,6 @@ const nsFrameList& nsContainerFrame::GetChildList(ChildListID aListID) const {
     }
     case FrameChildListID::ExcessOverflowContainers: {
       nsFrameList* list = GetExcessOverflowContainers();
-      return list ? *list : nsFrameList::EmptyList();
-    }
-    case FrameChildListID::Backdrop: {
-      nsFrameList* list = GetProperty(BackdropProperty());
       return list ? *list : nsFrameList::EmptyList();
     }
     default:
@@ -335,9 +301,6 @@ void nsContainerFrame::GetChildLists(nsTArray<ChildList>* aLists) const {
       (void)this;  // silence clang -Wunused-lambda-capture in opt builds
       reinterpret_cast<L>(aValue)->AppendIfNonempty(
           aLists, FrameChildListID::ExcessOverflowContainers);
-    } else if (aProp == BackdropProperty()) {
-      reinterpret_cast<L>(aValue)->AppendIfNonempty(aLists,
-                                                    FrameChildListID::Backdrop);
     }
     return true;
   });
@@ -1019,10 +982,10 @@ void nsContainerFrame::DisplayOverflowContainers(
   }
 }
 
-void nsContainerFrame::DisplayAbsoluteContinuations(
+void nsContainerFrame::DisplayPushedAbsoluteFrames(
     nsDisplayListBuilder* aBuilder, const nsDisplayListSet& aLists) {
   for (nsIFrame* frame : GetChildList(FrameChildListID::Absolute)) {
-    if (frame->GetPrevInFlow()) {
+    if (frame->HasAnyStateBits(NS_FRAME_IS_PUSHED_OUT_OF_FLOW)) {
       BuildDisplayListForChild(aBuilder, frame, aLists);
     }
   }
@@ -2472,29 +2435,30 @@ StyleAlignFlags nsContainerFrame::CSSAlignmentForAbsPosChild(
 
 StyleAlignFlags
 nsContainerFrame::CSSAlignmentForAbsPosChildWithinContainingBlock(
-    const ReflowInput& aChildRI, LogicalAxis aLogicalAxis,
+    const SizeComputationInput& aSizingInput, LogicalAxis aLogicalAxis,
     const StylePositionArea& aResolvedPositionArea,
     const LogicalSize& aCBSize) const {
-  MOZ_ASSERT(aChildRI.mFrame->IsAbsolutelyPositioned(),
+  MOZ_ASSERT(aSizingInput.mFrame->IsAbsolutelyPositioned(),
              "This method should only be called for abspos children");
   // When determining the position of absolutely-positioned boxes,
   // `auto` behaves as `normal`.
   StyleAlignFlags alignment =
-      aChildRI.mStylePosition->UsedSelfAlignment(aLogicalAxis, nullptr);
+      aSizingInput.mFrame->StylePosition()->UsedSelfAlignment(aLogicalAxis,
+                                                              nullptr);
 
   // Check if position-area is set - if so, it determines the default alignment
   // https://drafts.csswg.org/css-anchor-position/#position-area-alignment
   if (!aResolvedPositionArea.IsNone() && alignment == StyleAlignFlags::NORMAL) {
     const WritingMode cbWM = GetWritingMode();
     const auto anchorResolutionParams = AnchorPosResolutionParams::From(
-        &aChildRI, /* aIgnorePositionArea = */ true);
+        &aSizingInput, /* aIgnorePositionArea = */ true);
     const auto anchorOffsetResolutionParams =
         AnchorPosOffsetResolutionParams::ExplicitCBFrameSize(
             anchorResolutionParams, &aCBSize);
 
     // Check if we have exactly one auto inset in this axis (IMCB situation)
     const auto singleAutoInset =
-        aChildRI.mStylePosition->GetSingleAutoInsetInAxis(
+        aSizingInput.mFrame->StylePosition()->GetSingleAutoInsetInAxis(
             aLogicalAxis, cbWM, anchorOffsetResolutionParams);
 
     // Check if exactly one inset in the axis is auto
@@ -2518,13 +2482,13 @@ nsContainerFrame::CSSAlignmentForAbsPosChildWithinContainingBlock(
       const auto axis = ToStyleLogicalAxis(aLogicalAxis);
       const auto cbSWM = cbWM.ToStyleWritingMode();
       const auto selfWM =
-          aChildRI.mFrame->GetWritingMode().ToStyleWritingMode();
+          aSizingInput.mFrame->GetWritingMode().ToStyleWritingMode();
       Servo_ResolvePositionAreaSelfAlignment(&aResolvedPositionArea, axis,
                                              &cbSWM, &selfWM, &alignment);
     }
   }
 
-  return CSSAlignUtils::UsedAlignmentForAbsPos(aChildRI.mFrame, alignment,
+  return CSSAlignUtils::UsedAlignmentForAbsPos(aSizingInput.mFrame, alignment,
                                                aLogicalAxis, GetWritingMode());
 }
 
@@ -2818,9 +2782,8 @@ void nsContainerFrame::SanityCheckChildListsBeforeReflow() const {
                "the process.");
     for (const auto& [list, listID] : f->ChildLists()) {
       if (!itemLists.contains(listID)) {
-        MOZ_ASSERT(
-            absLists.contains(listID) || listID == FrameChildListID::Backdrop,
-            "unexpected non-empty child list");
+        MOZ_ASSERT(absLists.contains(listID),
+                   "unexpected non-empty child list");
         continue;
       }
       for (const auto* child : list) {

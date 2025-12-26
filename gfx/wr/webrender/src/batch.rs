@@ -1904,7 +1904,6 @@ impl BatchBuilder {
                                 SubpixelDirection::None => DeviceVector2D::new(0.5, 0.5),
                                 SubpixelDirection::Horizontal => DeviceVector2D::new(0.125, 0.5),
                                 SubpixelDirection::Vertical => DeviceVector2D::new(0.5, 0.125),
-                                SubpixelDirection::Mixed => DeviceVector2D::new(0.125, 0.125),
                             };
                             let text_offset = prim_header.local_rect.max.to_vector();
 
@@ -2016,6 +2015,9 @@ impl BatchBuilder {
                                 glyph.index_in_text_run,
                                 glyph.uv_rect_address,
                                 color_mode,
+                                glyph.subpx_offset_x,
+                                glyph.subpx_offset_y,
+                                glyph.is_packed_glyph,
                             ));
                         }
                     },

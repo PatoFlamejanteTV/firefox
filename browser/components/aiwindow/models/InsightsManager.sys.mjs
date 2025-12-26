@@ -9,6 +9,7 @@ import {
   aggregateSessions,
   topkAggregates,
 } from "moz-src:///browser/components/aiwindow/models/InsightsHistorySource.sys.mjs";
+import { getRecentChats } from "./InsightsChatSource.sys.mjs";
 import {
   openAIEngine,
   renderPrompt,
@@ -28,7 +29,7 @@ import {
 import {
   messageInsightClassificationSystemPrompt,
   messageInsightClassificationPrompt,
-} from "moz-src:///browser/components/aiwindow/models/prompts/insightsPrompts.sys.mjs";
+} from "moz-src:///browser/components/aiwindow/models/prompts/InsightsPrompts.sys.mjs";
 import { INSIGHTS_MESSAGE_CLASSIFY_SCHEMA } from "moz-src:///browser/components/aiwindow/models/InsightsSchemas.sys.mjs";
 
 const K_DOMAINS_FULL = 100;
@@ -41,6 +42,8 @@ const K_SEARCHES_DELTA = 10;
 const DEFAULT_HISTORY_FULL_LOOKUP_DAYS = 60;
 const DEFAULT_HISTORY_FULL_MAX_RESULTS = 3000;
 const DEFAULT_HISTORY_DELTA_MAX_RESULTS = 500;
+const DEFAULT_CHAT_FULL_MAX_RESULTS = 50;
+const DEFAULT_CHAT_HALF_LIFE_DAYS_FULL_RESULTS = 7;
 
 const LAST_HISTORY_INSIGHT_TS_ATTRIBUTE = "last_history_insight_ts";
 const LAST_CONVERSATION_INSIGHT_TS_ATTRIBUTE = "last_chat_insight_ts";
@@ -49,6 +52,9 @@ const LAST_CONVERSATION_INSIGHT_TS_ATTRIBUTE = "last_chat_insight_ts";
  */
 export class InsightsManager {
   static #openAIEnginePromise = null;
+
+  // Exposed to be stubbed for testing
+  static _getRecentChats = getRecentChats;
 
   /**
    * Creates and returns an class-level openAIEngine instance if one has not already been created.
@@ -61,6 +67,36 @@ export class InsightsManager {
       this.#openAIEnginePromise = await openAIEngine.build();
     }
     return this.#openAIEnginePromise;
+  }
+
+  /**
+   * Generates, saves, and returns insights from pre-computed sources
+   *
+   * @param {object} sources      User data source type to aggregrated records (i.e., {history: [domainItems, titleItems, searchItems]})
+   * @param {string} sourceName   Specific source type from which insights are generated ("history" or "conversation")
+   * @returns {Promise<Insight[]>}
+   *          A promise that resolves to the list of persisted insights
+   *          (newly created or updated), sorted and shaped as returned by
+   *          {@link InsightStore.addInsight}.
+   */
+  static async generateAndSaveInsightsFromSources(sources, sourceName) {
+    const now = Date.now();
+    const existingInsights = await this.getAllInsights();
+    const existingInsightsSummaries = existingInsights.map(
+      i => i.insight_summary
+    );
+    const engine = await this.ensureOpenAIEngine();
+    const insights = await generateInsights(
+      engine,
+      sources,
+      existingInsightsSummaries
+    );
+    const { persistedInsights } = await this.saveInsights(
+      insights,
+      sourceName,
+      now
+    );
+    return persistedInsights;
   }
 
   /**
@@ -79,11 +115,7 @@ export class InsightsManager {
    *         * Uses delta top-k settings (K_DOMAINS_DELTA, K_TITLES_DELTA, K_SEARCHES_DELTA).
    *  3. Calls {@link getAggregatedBrowserHistory} with the computed options to obtain
    *     domain, title, and search aggregates.
-   *  4. Fetches existing insights via {@link getAllInsights}.
-   *  5. Ensures a shared OpenAI engine via {@link ensureOpenAIEngine} and calls
-   *     {@link generateInsights} to produce new/updated insights.
-   *  6. Persists those insights via {@link saveInsights}, which also updates
-   *     `last_history_insight_ts` in {@link InsightStore.updateMeta}.
+   *  4. Calls {@link generateAndSaveInsightsFromSources} with retrieved history to generate and save new insights.
    *
    * @returns {Promise<Insight[]>}
    *          A promise that resolves to the list of persisted history insights
@@ -128,22 +160,52 @@ export class InsightsManager {
         topkAggregatesOpts
       );
     const sources = { history: [domainItems, titleItems, searchItems] };
-    const existingInsights = await this.getAllInsights();
-    const existingInsightsSummaries = existingInsights.map(
-      i => i.insight_summary
-    );
-    const engine = await this.ensureOpenAIEngine();
-    const insights = await generateInsights(
-      engine,
+    return await this.generateAndSaveInsightsFromSources(
       sources,
-      existingInsightsSummaries
+      SOURCE_HISTORY
     );
-    const { persistedInsights } = await this.saveInsights(
-      insights,
-      SOURCE_HISTORY,
-      now
+  }
+
+  /**
+   * Generates and persists insights derived from the user's recent chat history.
+   *
+   * This method:
+   *  1. Reads {@link last_chat_insight_ts} via {@link getLastConversationInsightTimestamp}.
+   *  2. Decides between:
+   *     - Full processing (first run, no prior timestamp):
+   *         * Pulls all messages from the beginning of time.
+   *     - Delta processing (subsequent runs, prior timestamp present):
+   *         * Pulls all messages since the last timestamp.
+   *  3. Calls {@link getRecentChats} with the computed options to obtain messages.
+   *  4. Calls {@link generateAndSaveInsightsFromSources} with messages to generate and save new insights.
+   *
+   * @returns {Promise<Insight[]>}
+   *          A promise that resolves to the list of persisted conversation insights
+   *          (newly created or updated), sorted and shaped as returned by
+   *          {@link InsightStore.addInsight}.
+   */
+  static async generateInsightsFromConversationHistory() {
+    // get last chat insight timestamp in ms
+    const lastTsMs = await this.getLastConversationInsightTimestamp();
+    const isDelta = typeof lastTsMs === "number" && lastTsMs > 0;
+
+    let startTime = 0;
+
+    // If this is a subsequent run, set startTime to lastTsMs, the last time we generated chat-based insights
+    if (isDelta) {
+      startTime = lastTsMs;
+    }
+
+    const chatMessages = await this._getRecentChats(
+      startTime,
+      DEFAULT_CHAT_FULL_MAX_RESULTS,
+      DEFAULT_CHAT_HALF_LIFE_DAYS_FULL_RESULTS
     );
-    return persistedInsights;
+    const sources = { conversation: chatMessages };
+    return await this.generateAndSaveInsightsFromSources(
+      sources,
+      SOURCE_CONVERSATION
+    );
   }
 
   /**
@@ -205,6 +267,9 @@ export class InsightsManager {
    * Retrieves all stored insights.
    * This is a quick-access wrapper around InsightStore.getInsights() with no additional processing.
    *
+   * @param {object} [opts={}]
+   * @param {boolean} [opts.includeSoftDeleted=false]
+   *        Whether to include soft-deleted insights.
    * @returns {Promise<Array<Map<{
    *  insight_summary: string,
    *  category: string,
@@ -212,8 +277,8 @@ export class InsightsManager {
    *  score: number,
    * }>>>}                                    List of insights
    */
-  static async getAllInsights() {
-    return await InsightStore.getInsights();
+  static async getAllInsights(opts = { includeSoftDeleted: false }) {
+    return await InsightStore.getInsights(opts);
   }
 
   /**
@@ -227,6 +292,19 @@ export class InsightsManager {
   static async getLastHistoryInsightTimestamp() {
     const meta = await InsightStore.getMeta();
     return meta.last_history_insight_ts || 0;
+  }
+
+  /**
+   * Returns the last timestamp (in ms since Unix epoch) when a chat-based
+   * insight was generated, as persisted in InsightStore.meta.
+   *
+   * If the store has never been updated, this returns 0.
+   *
+   * @returns {Promise<number>}  Milliseconds since Unix epoch
+   */
+  static async getLastConversationInsightTimestamp() {
+    const meta = await InsightStore.getMeta();
+    return meta.last_chat_insight_ts || 0;
   }
 
   /**
@@ -285,6 +363,32 @@ export class InsightsManager {
       persistedInsights,
       newTimestampMs: newTsMs,
     };
+  }
+
+  /**
+   * Soft deletes an insight by its ID.
+   * Soft deletion sets the insight's `is_deleted` flag to true. This prevents insight getter functions
+   * from returning the insight when using default parameters. It does not delete the insight from storage.
+   *
+   * From the user's perspective, soft-deleted insights will not be used in assistant responses but will still exist in storage.
+   *
+   * @param {string} insightId        ID of the insight to soft-delete
+   * @returns {Promise<Insight|null>} The soft-deleted insight, or null if not found
+   */
+  static async softDeleteInsightById(insightId) {
+    return await InsightStore.softDeleteInsight(insightId);
+  }
+
+  /**
+   * Hard deletes an insight by its ID.
+   * Hard deletion permenantly removes the insight from storage entirely. This method should be used
+   * by UI to allow users to delete insights they no longer want stored.
+   *
+   * @param {string} insightId        ID of the insight to hard-delete
+   * @returns {Promise<boolean>}      True if the insight was found and deleted, false otherwise
+   */
+  static async hardDeleteInsightById(insightId) {
+    return await InsightStore.hardDeleteInsight(insightId);
   }
 
   /**

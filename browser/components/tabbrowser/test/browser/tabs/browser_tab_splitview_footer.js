@@ -29,12 +29,18 @@ async function setupSplitView() {
   info("Add tabs into an active split view.");
   await BrowserTestUtils.switchTab(gBrowser, tabs[0]);
   const splitView = gBrowser.addTabSplitView(tabs);
+  const tabpanels = document.getElementById("tabbrowser-tabpanels");
+  await BrowserTestUtils.waitForMutationCondition(
+    tabpanels,
+    { attributes: true },
+    () => tabpanels.hasAttribute("splitview")
+  );
   for (const tab of tabs) {
     const tabPanel = document.getElementById(tab.linkedPanel);
     await BrowserTestUtils.waitForMutationCondition(
       tabPanel,
       { attributes: true },
-      () => tabPanel.classList.contains("split-view-panel")
+      () => tabPanel.classList.contains("split-view-panel-active")
     );
   }
 
@@ -213,4 +219,34 @@ add_task(async function test_menu_close_tabs() {
   );
   await activateCommand(inactivePanel, "splitViewCmd_closeTabs");
   await promiseTabsClosed;
+});
+
+add_task(async function test_findbar_displayed_over_footer() {
+  const { tabs, splitView } = await setupSplitView();
+  const [tab1, tab2] = tabs;
+  await SimpleTest.promiseFocus(tab1.linkedBrowser);
+
+  info("Activate Find in Page within the second panel.");
+  const findbar = await gBrowser.getFindBar(tab2);
+  const promiseFindbarOpen = BrowserTestUtils.waitForEvent(
+    findbar,
+    "findbaropen"
+  );
+  findbar.open();
+  await promiseFindbarOpen;
+
+  const panel = document.getElementById(tab2.linkedPanel);
+  const footer = panel.querySelector("split-view-footer");
+  const footerRect = footer.getBoundingClientRect();
+  Assert.ok(
+    !footer.contains(
+      document.elementFromPoint(
+        footerRect.left + footerRect.width / 2,
+        footerRect.top + footerRect.height / 2
+      )
+    ),
+    "Findbar is displayed over split view footer."
+  );
+
+  splitView.close();
 });

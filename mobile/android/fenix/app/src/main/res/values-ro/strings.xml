@@ -624,6 +624,10 @@
   <string name="onboarding_marketing_body_1" tools:ignore="BrandUsage,UnusedResources">Partajează cu partenerii de marketing Mozilla cum ai descoperit Firefox și că îl folosești. Aceste date nu sunt niciodată vândute.</string>
   <!-- Marketing onboarding page button label variant. Button to confirm choice and start browsing. -->
   <string name="onboarding_marketing_positive_button_1" tools:ignore="UnusedResources">Sunt de acord și încep navigarea</string>
+  <!-- ==== Project "Nova" onboarding strings ==== -->
+
+  <!-- ==== End of Project "Nova" onboarding strings ==== -->
+
   <!-- Onboarding header for the toolbar selection card, used by Nimbus experiments. -->
   <string name="onboarding_customize_toolbar_title" tools:ignore="UnusedResources">Alege plasarea barei de instrumente</string>
   <!-- Onboarding sub header for toolbar selection card, used by Nimbus experiments. -->
@@ -822,8 +826,6 @@
   <string name="preferences_gestures">Gesturi</string>
   <!-- Preference for settings related to visual options -->
   <string name="preferences_customize">Personalizare</string>
-  <!-- Preference description for banner about signing in -->
-  <string name="preferences_sign_in_description_2" tools:ignore="UnusedResources" moz:removedIn="145">Intră în cont ca să îți sincronizezi filele, marcajele, parolele și mai multe.</string>
   <!-- Preference description shown in the banner prompting the user to sign in for sync features -->
   <string name="preferences_sign_in_description">Sincronizează filele, marcajele, parolele și multe altele.</string>
   <!-- Preference shown instead of account display name while account profile information isn't available yet. -->
@@ -1219,10 +1221,8 @@
   <!--
     Turn On Sync Preferences
 
-    Header of the Sync and save your data preference view
+    Header of the Sign in preference view
   -->
-  <string name="preferences_sync_2" tools:ignore="UnusedResources" moz:removedIn="145">Sincronizează și salvează-ți datele</string>
-  <!-- Header of the Sign in preference view -->
   <string name="preferences_sign_in">Intră în cont</string>
   <!-- Preference for reconnecting to FxA sync -->
   <string name="preferences_sync_sign_in_to_reconnect">Intră în cont pentru reconectare</string>
@@ -1471,6 +1471,8 @@
   <string name="tab_drawer_fab_content">Privată</string>
   <!-- Text for the new tab button to indicate syncing command on the synced tabs page -->
   <string name="tab_drawer_fab_sync">Sincronizare</string>
+  <!-- Text for the tab search bar placeholder -->
+  <string name="tab_manager_search_bar_placeholder">Caută în file</string>
   <!-- Text shown in the menu for sharing all tabs -->
   <string name="tab_tray_menu_item_share">Partajează toate filele</string>
   <!-- Text shown in the menu to view recently closed tabs -->
@@ -1509,8 +1511,6 @@
   <string name="tab_tray_multiselect_menu_content_description">Meniul filelor selectate</string>
   <!-- Title text displayed for a homepage tab in the tabs tray. -->
   <string name="tab_tray_homepage_tab">Pagină de start</string>
-  <!-- Title text displayed for a homepage tab in the tabs tray. %s is a placeholder that will be replaced by app name. -->
-  <string name="tab_tray_homepage_tab_2" tools:ignore="UnusedResources" moz:removedIn="145">pagină de start %s</string>
   <!-- Content description (not visible, for screen readers etc.): Removes tab from collection button. Removes the selected tab from collection when pressed -->
   <string name="remove_tab_from_collection">Elimină fila din colecție</string>
   <!-- Text for button to enter multiselect mode in tabs tray -->
@@ -1521,6 +1521,8 @@
   <string name="close_tab_title">Închide fila %s</string>
   <!-- Content description (not visible, for screen readers etc.): Opens the open tabs menu when pressed -->
   <string name="open_tabs_menu">Meniu de file deschise</string>
+  <!-- Content description (not visible, for screen readers etc.): Return to tab manager -->
+  <string name="tab_manager_search_bar_back_content_description">Înapoi la managerul de file</string>
   <!-- Open tabs menu item to save tabs to collection -->
   <string name="tabs_menu_save_to_collection1">Salvează filele în colecție</string>
   <!-- Text for the menu button to delete a collection -->
@@ -2113,8 +2115,6 @@
   <string name="toast_copy_link_to_clipboard">Copiat în clipboard</string>
   <!-- An option from the share dialog to sign into sync -->
   <string name="sync_sign_in">Intră în cont pentru sincronizare</string>
-  <!-- An option from the three dot menu to sync and save data -->
-  <string name="sync_menu_sync_and_save_data" tools:ignore="UnusedResources" moz:removedIn="145">Sincronizează și salvează datele</string>
   <!-- An option from the three dot menu to sign in -->
   <string name="sync_menu_sign_in">Intră în cont</string>
   <!-- An option from the share dialog to send link to all other sync devices -->
@@ -2703,6 +2703,10 @@
   <string name="edit_login_navigate_back_button_content_description">Navighează înapoi</string>
   <!-- Content description, used by tools like screenreaders, to press on the edit login button. -->
   <string name="edit_login_button_content_description">Editează autentificarea</string>
+  <!-- Content description, used by tools like screenreaders, to press on the add new login button. -->
+  <string name="saved_logins_add_new_login_button_content_description">Adaugă date noi de autentificare</string>
+  <!-- Content description, used by tools like screenreaders, to press on the clear search text button. -->
+  <string name="saved_logins_clear_search_text_button_content_description">Șterge textul căutat</string>
   <!-- Content Description (for screenreaders etc) read for the button to open a site in logins -->
   <string name="saved_login_open_site">Deschide site-ul în browser</string>
   <!-- Content Description (for screenreaders etc) read for the button to reveal a password in logins -->
@@ -3914,11 +3918,9 @@
   <string name="settings_search_no_results_title">Nu a apărut nimic</string>
   <!-- Sub-message displayed when the search field is not empty but search results is empty. -->
   <string name="settings_search_no_results_message">Poate încerci o altă căutare?</string>
-  <!--
-    Terms of use pop up prompt
+  <!-- ==== Terms of use pop up prompt ==== -->
 
-    Title for the pop up prompt
-  -->
+  <!-- Title for the pop up prompt -->
   <string name="terms_of_use_prompt_title">Avem o actualizare</string>
   <!--
     Message for the terms of use pop up prompt
@@ -3942,6 +3944,10 @@
   <string name="terms_of_use_prompt_accept">Acceptă</string>
   <!-- Label for a button to postpone accepting the terms of use -->
   <string name="terms_of_use_prompt_postpone">Amintește-mi mai târziu</string>
+  <!-- ==== Experiment strings. ==== -->
+
+  <!-- ==== End of Terms of use popup prompt. ==== -->
+
   <!--
     Privacy notice homepage banner
 

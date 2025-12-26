@@ -600,6 +600,17 @@ class Settings(
         },
     )
 
+    var isTermsOfUsePublishedDebugDateEnabled by booleanPreference(
+        appContext.getPreferenceKey(R.string.pref_key_terms_latest_date),
+        default = false,
+        persistDefaultIfNotExists = true,
+    )
+
+    var privacyNoticeBannerLastDisplayedTimeInMillis by longPreference(
+        key = appContext.getPreferenceKey(R.string.pref_key_privacy_notice_banner_last_displayed_time),
+        default = 0,
+    )
+
     /**
      * The version of the Terms of Use that the user has accepted.
      */
@@ -712,11 +723,6 @@ class Settings(
 
     val shouldShowSecurityPinWarning: Boolean
         get() = secureWarningCount.underMaxCount()
-
-    var shouldShowPrivacyPopWindow by booleanPreference(
-        appContext.getPreferenceKey(R.string.pref_key_privacy_pop_window),
-        default = true,
-    )
 
     var shouldUseLightTheme by booleanPreference(
         appContext.getPreferenceKey(R.string.pref_key_light_theme),
@@ -1363,7 +1369,7 @@ class Settings(
 
     var shouldShowToolbarCustomization by booleanPreference(
         key = appContext.getPreferenceKey(R.string.pref_key_enable_toolbar_customization),
-        default = { FxNimbus.features.toolbarRedesignOption.value().showExpandedCustomization },
+        default = { FxNimbus.features.toolbarRedesignOption.value().showCustomization },
     )
 
     val toolbarPosition: ToolbarPosition
@@ -2140,13 +2146,28 @@ class Settings(
         hasUserBeenOnboarded: Boolean,
         isLauncherIntent: Boolean,
     ): Boolean {
-        return if (featureEnabled && !hasUserBeenOnboarded && isLauncherIntent) {
+        val shouldShowByDefaultConditions = featureEnabled && !hasUserBeenOnboarded && isLauncherIntent
+
+        val shouldShow = shouldShowByDefaultConditions || enablePersistentOnboarding
+
+        if (shouldShow) {
             FxNimbus.features.junoOnboarding.recordExposure()
-            true
-        } else {
-            false
         }
+
+        return shouldShow
     }
+
+    /**
+     * Secret setting preference that forces the onboarding flow to be shown every time `HomeActivity`
+     * is created. When `true`, onboarding is displayed on each launch; when `false`, onboarding is only
+     * shown based on the default conditions.
+     *
+     * Build specific onboarding cards configuration (as defined in `onboarding.yaml.fml`) still applies.
+     */
+    var enablePersistentOnboarding by booleanPreference(
+        appContext.getPreferenceKey(R.string.pref_key_enable_persistent_onboarding),
+        default = false,
+    )
 
     /**
      * Indicates if the onboarding feature is enabled.
@@ -2172,6 +2193,11 @@ class Settings(
     var shouldUseComposableToolbar by booleanPreference(
         key = appContext.getPreferenceKey(R.string.pref_key_enable_composable_toolbar),
         default = { FxNimbus.features.composableToolbar.value().enabled },
+    )
+
+    var shouldUseMinimalBottomToolbarWhenEnteringText by booleanPreference(
+        key = appContext.getPreferenceKey(R.string.pref_key_use_minimal_bottom_toolbar_while_entering_text),
+        default = { FxNimbus.features.minimalAddressbar.value().atBottomWhileEnteringText },
     )
 
     /**
@@ -2340,6 +2366,14 @@ class Settings(
     )
 
     /**
+     * Indicates if Firefox Labs is enabled.
+     */
+    var enableFirefoxLabs by booleanPreference(
+        key = appContext.getPreferenceKey(R.string.pref_key_enable_firefox_labs),
+        default = FeatureFlags.FIREFOX_LABS,
+    )
+
+    /**
      * Indicates if the Unified Trust Panel is enabled.
      */
     var enableUnifiedTrustPanel by booleanPreference(
@@ -2383,11 +2417,6 @@ class Settings(
         key = appContext.getPreferenceKey(R.string.pref_key_growth_early_search),
         default = false,
     )
-
-    /**
-     * Indicates if the new Search settings UI is enabled.
-     */
-    var enableUnifiedSearchSettingsUI: Boolean = showUnifiedSearchFeature && FeatureFlags.UNIFIED_SEARCH_SETTINGS
 
     /**
      * Indicates if hidden engines were restored due to migration to unified search settings UI.
@@ -2792,6 +2821,14 @@ class Settings(
     var tabManagerOpeningAnimationEnabled by booleanPreference(
         key = appContext.getPreferenceKey(R.string.pref_key_tab_manager_opening_animation),
         default = { DefaultTabManagementFeatureHelper.openingAnimationEnabled },
+    )
+
+    /**
+     * Whether the Tab Search feature is enabled.
+     */
+    var tabSearchEnabled by booleanPreference(
+        key = appContext.getPreferenceKey(R.string.pref_key_tab_search),
+        default = { DefaultTabManagementFeatureHelper.tabSearchEnabled },
     )
 
     /**

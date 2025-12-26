@@ -23,6 +23,8 @@ class CopyableTArray;
 
 namespace mozilla {
 
+class nsDisplayListBuilder;
+
 struct AnchorPosInfo {
   // Border-box of the anchor frame, offset against the positioned frame's
   // absolute containing block's padding box.
@@ -92,6 +94,9 @@ class AnchorPosReferenceData {
   struct PositionTryBackup {
     mozilla::PhysicalAxes mCompensatingForScroll;
     nsPoint mDefaultScrollShift;
+    nsRect mAdjustedContainingBlock;
+    SideBits mScrollCompensatedSides;
+    nsMargin mInsets;
   };
   using Value = mozilla::Maybe<AnchorPosResolutionData>;
 
@@ -126,26 +131,56 @@ class AnchorPosReferenceData {
   PositionTryBackup TryPositionWithSameDefaultAnchor() {
     auto compensatingForScroll = std::exchange(mCompensatingForScroll, {});
     auto defaultScrollShift = std::exchange(mDefaultScrollShift, {});
-    return {compensatingForScroll, defaultScrollShift};
+    auto adjustedContainingBlock = std::exchange(mAdjustedContainingBlock, {});
+    auto containingBlockSidesAttachedToAnchor =
+        std::exchange(mScrollCompensatedSides, SideBits::eNone);
+    auto insets = std::exchange(mInsets, nsMargin{});
+    return {compensatingForScroll, defaultScrollShift, adjustedContainingBlock,
+            containingBlockSidesAttachedToAnchor, insets};
   }
 
   void UndoTryPositionWithSameDefaultAnchor(PositionTryBackup&& aBackup) {
     mCompensatingForScroll = aBackup.mCompensatingForScroll;
     mDefaultScrollShift = aBackup.mDefaultScrollShift;
+    mAdjustedContainingBlock = aBackup.mAdjustedContainingBlock;
+    mScrollCompensatedSides = aBackup.mScrollCompensatedSides;
+    mInsets = aBackup.mInsets;
   }
 
   // Distance from the default anchor to the nearest scroll container.
   DistanceToNearestScrollContainer mDistanceToDefaultScrollContainer;
   // https://drafts.csswg.org/css-anchor-position-1/#default-scroll-shift
   nsPoint mDefaultScrollShift;
-  // Rect of containing block before being inset-modified, at the time of
-  // resolution.
-  nsRect mContainingBlockRect;
+  // Rect of the original containg block.
+  nsRect mOriginalContainingBlockRect;
+  // Adjusted containing block, by position-area or grid, as per
+  // https://drafts.csswg.org/css-position/#original-cb
+  // TODO(dshin, bug 2004596): "or" should be "and/or."
+  nsRect mAdjustedContainingBlock;
   // TODO(dshin, bug 1987962): Remembered scroll offset
   // https://drafts.csswg.org/css-anchor-position-1/#remembered-scroll-offset
   // Name of the default used anchor. Not necessarily positioned frame's
   // style, because of fallbacks.
   RefPtr<const nsAtom> mDefaultAnchorName;
+  // Flag indicating which sides of the containing block attach to the
+  // scroll-compensated anchor. Whenever a scroll-compensated anchor scrolls, it
+  // effectively moves around w.r.t. its absolute containing block. This
+  // effectively changes the size of the containing block. For example, given:
+  //
+  // * Absolute containing block of 50px height,
+  // * Scroller, under the abs CB, with the scrolled content height of 100px,
+  // * Anchor element, under the scroller, of 30px height, and
+  // * Positioned element of 30px height, attached to anchor at the bottom.
+  //
+  // The positioned element would overflow the abs CB, until the scroller moves
+  // down by 10px. We address this by defining sides of the CB that scrolls
+  // with the anchor, so that whenever we carry out an overflow check, we move
+  // those sides by the scroll offset, while pinning the rest of the sides to
+  // the original containing block.
+  SideBits mScrollCompensatedSides = SideBits::eNone;
+  // Resolved insets for this positioned element. Modifies the adjusted &
+  // scrolled containing block.
+  nsMargin mInsets;
 
  private:
   ResolutionMap mMap;
@@ -155,6 +190,7 @@ class AnchorPosReferenceData {
 };
 
 struct LastSuccessfulPositionData {
+  RefPtr<const ComputedStyle> mStyle;
   uint32_t mIndex = 0;
   bool mTriedAllFallbacks = false;
 };
@@ -309,8 +345,12 @@ struct AnchorPositioningUtils {
   /**
    * If aFrame is positioned using CSS anchor positioning, and it scrolls with
    * its anchor this function returns the anchor. Otherwise null.
+   * Note that this function has different behaviour if it called during paint
+   * (ie aBuilder not null) or not during painting (aBuilder null).
    */
-  static nsIFrame* GetAnchorThatFrameScrollsWith(nsIFrame* aFrame);
+  static nsIFrame* GetAnchorThatFrameScrollsWith(nsIFrame* aFrame,
+                                                 nsDisplayListBuilder* aBuilder,
+                                                 bool aSkipAsserts = false);
 
   // Trigger a layout for positioned items that are currently overflowing their
   // abs-cb and that have available fallbacks to try.

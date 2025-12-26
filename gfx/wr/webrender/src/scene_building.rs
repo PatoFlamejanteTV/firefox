@@ -60,7 +60,8 @@ use crate::frame_builder::FrameBuilderConfig;
 use glyph_rasterizer::{FontInstance, SharedFontResources};
 use crate::hit_test::HitTestingScene;
 use crate::intern::Interner;
-use crate::internal_types::{FastHashMap, LayoutPrimitiveInfo, Filter, FilterGraphNode, FilterGraphOp, FilterGraphPictureReference, PlaneSplitterIndex, PipelineInstanceId};
+use crate::internal_types::{FastHashMap, LayoutPrimitiveInfo, Filter, PlaneSplitterIndex, PipelineInstanceId};
+use crate::svg_filter::{FilterGraphNode, FilterGraphOp, FilterGraphPictureReference};
 use crate::picture::{Picture3DContext, PictureCompositeMode, PicturePrimitive};
 use crate::picture::{BlitReason, OrderedPictureChild, PrimitiveList, SurfaceInfo, PictureFlags};
 use crate::picture_graph::PictureGraph;
@@ -77,7 +78,8 @@ use crate::prim_store::gradient::{
 };
 use crate::prim_store::image::{Image, YuvImage};
 use crate::prim_store::line_dec::{LineDecoration, LineDecorationCacheKey, get_line_decoration_size};
-use crate::prim_store::picture::{Picture, PictureCompositeKey, PictureKey};
+use crate::prim_store::picture::{Picture, PictureKey};
+use crate::picture_composite_mode::PictureCompositeKey;
 use crate::prim_store::text_run::TextRun;
 use crate::render_backend::SceneView;
 use crate::resource_cache::ImageRequest;
@@ -1198,6 +1200,17 @@ impl<'a> SceneBuilder<'a> {
             },
         };
 
+        let snap_origin = match info.reference_frame.kind {
+            ReferenceFrameKind::Transform { should_snap, .. } => should_snap,
+            ReferenceFrameKind::Perspective { .. } => false,
+        };
+
+        let origin = if snap_origin {
+            info.origin.round()
+        } else {
+            info.origin
+        };
+
         let external_scroll_offset = self.current_external_scroll_offset(parent_space);
 
         self.push_reference_frame(
@@ -1207,7 +1220,7 @@ impl<'a> SceneBuilder<'a> {
             info.reference_frame.transform_style,
             transform,
             info.reference_frame.kind,
-            (info.origin + external_scroll_offset).to_vector(),
+            (origin + external_scroll_offset).to_vector(),
             SpatialNodeUid::external(info.reference_frame.key, pipeline_id, instance_id),
         );
     }
